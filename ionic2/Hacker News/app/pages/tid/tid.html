@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Tid</ion-title>
+      <ion-buttons start>
+    <button (click)="dismiss()">
+      Cancel
+    </button>
+  </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <form (ngSubmit)="doneEnteringURL()" id="tidContent">
+    <ion-item>
+     <ion-label stacked>Enter URL</ion-label>
+     <ion-input type="text" [(ngModel)]="formData.url"></ion-input>
+    </ion-item>
+    <ion-item>
+     <ion-label>Disable identity transfer</ion-label>
+     <ion-checkbox [(ngModel)]="formData.disableIdentityTransfer" (ionChange)="disableIdentityTransfer()"></ion-checkbox>
+    </ion-item>
+    <ion-item id="linkTrackingCheckbox">
+     <ion-label>Disable link tracking</ion-label>
+     <ion-checkbox [(ngModel)]="formData.disableAutomaticOutboundLinkTracking" (ionChange)="disableAutomaticOutboundLinkTracking()"></ion-checkbox>
+    </ion-item>
+  </form>
+</ion-content>
