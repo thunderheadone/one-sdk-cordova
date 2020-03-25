@@ -1,0 +1,13 @@
+{
+  "ios": {
+    "debug": {
+      "developmentTeam": "VG7VUTUR9U"
+    },
+
+    "release": {
+      "developmentTeam": "VG7VUTUR9U",
+      "codeSignIdentity": "iPhone Developer",
+      "packageType": "ad-hoc"
+    }
+  }
+}

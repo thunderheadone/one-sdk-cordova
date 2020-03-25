@@ -1,0 +1,18 @@
+# OS X
+.DS_Store
+
+#visual studio code
+.vscode
+
+# Node
+npm-debug.log
+/node_modules
+
+# Cordova
+/platforms
+/plugins
+platforms
+plugins
+
+# res
+resources/signing
