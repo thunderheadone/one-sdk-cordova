@@ -109,6 +109,7 @@
         <icon height="87" src="resources/ios/icon/icon-small@3x.png" width="87" />
     </platform>
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
+    <hook src="../../scripts/beforeBuild.js" type="before_build" />
     <engine name="android" spec="^6.2.3" />
     <engine name="ios" spec="^4.4.0" />
     <plugin name="cordova-custom-config" spec="^4.0.2" />

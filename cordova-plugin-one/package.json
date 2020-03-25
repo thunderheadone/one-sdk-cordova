@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-one",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "description": "One Cordova Plugin for the ONE SDK for iOS and Android",
   "cordova": {
     "id": "cordova-plugin-one",
@@ -19,6 +19,12 @@
     "thunderhead",
     "ONE Engagement Hub"
   ],
+  "scripts": {
+    "prepublish": "node ./scripts/bump-cordova-sdk-package-version.js"
+  },
+  "devDependencies": {
+    "shelljs": "0.7.8"
+  },
   "author": "Thunderhead One Inc.",
   "license": "Copyright © 2017 Thunderhead. All rights reserved."
 }

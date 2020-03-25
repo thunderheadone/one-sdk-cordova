@@ -34,6 +34,7 @@
             <string>production</string>
         </config-file>
     </platform>
+    <hook src="../scripts/beforeBuild.js" type="before_build" />
     <engine name="android" spec="^6.2.3" />
     <engine name="ios" spec="^4.4.0" />
     <plugin name="cordova-custom-config" spec="^3.2.0" />
