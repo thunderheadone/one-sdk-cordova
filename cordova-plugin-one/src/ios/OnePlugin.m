@@ -3,6 +3,8 @@
 #import "Thunderhead/One.h"
 #import "OnePlugin.h"
 
+NSString * const kOneCordovaPluginVersion = @"1.3.1";
+
 @implementation OnePlugin
 
 - (void)initializeOne:(CDVInvokedUrlCommand*)command

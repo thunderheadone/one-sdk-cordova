@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import com.thunderhead.OneSdkVersion;
 
 
 /**
@@ -325,6 +326,7 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
             } else {
                 one.init(siteKey, touchpointURI, apiKey, sharedSecret, userId, OneModes.USER_MODE, hostName);
             }
+            OneSdkVersion.updateModuleSdkVersion(one);
             return true;
         }
         return false;
