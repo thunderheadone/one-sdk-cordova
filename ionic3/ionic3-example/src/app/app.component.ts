@@ -22,11 +22,11 @@ export class MyApp {
       
       if (one) {
           one.init({
-                  siteKey: "ONE-XXXXXXXXXX-1022",
+                  siteKey: "ONE-WSKWCQMKQI-xxxx",
                   touchpointURI: "myAppsNameURI",
-                  apiKey: "f713d44a-8af0-4e79-ba7e-xxxxxxxxx",
-                  sharedSecret: "bb8bacb2-ffc2-4c52-aaf4-xxx",
-                  userId: "yourUsername@yourCompanyName",
+                  apiKey: "eff883bb-d4e5-4d0e-bba0-xxxxxx",
+                  sharedSecret: "f22413d6-1667-46e5-bfcb-xxxxx",
+                  userId: "apop@onedemo-xxxxx",
                   adminMode: false,
                   hostName: "https://xx.thunderhead.com"
                   }
