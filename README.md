@@ -1,3 +1,5 @@
+![Thunderhead SDK](https://i.imgur.com/gfizURy.png "Thunderhead")
+
 # one-sdk-cordova
 Thunderhead Cordova Plugin for apps built using Cordova, PhoneGap or Ionic. 
 
