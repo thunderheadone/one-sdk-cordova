@@ -4,7 +4,7 @@ var utilities = require("./utilities");
 var logger = require("console");
 
 module.exports = {
-    //Appends a section to the build.gradle file of an android project
+    // Appends a section to the build.gradle file of an android project
     addOneBuildToolsGradle: function (context) {
         if (!utilities.getOneAspectsEnabled(context)) {
             logger.log("One plugin: Aspect functionality wasn't enabled");
@@ -15,36 +15,19 @@ module.exports = {
         var buildGradle = utilities.readBuildGradle();
         buildGradle +=
            `
-           // One Cordova Plugin - Start One Aspectj configuration
+           // One Cordova Plugin - Start One SDK configuration
             buildscript {
                 repositories {
-                    maven { url 'https://jitpack.io' }
+                    google()
                     jcenter()
+                    maven { url 'https://thunderhead.mycloudrepo.io/public/repositories/one-sdk-android' }
                 }
                 dependencies {
-                    classpath 'com.android.tools.build:gradle:2.3.0'
-                    classpath 'com.github.Archinamon:GradleAspectJ-Android:3.0.2'
+                    classpath 'com.android.tools.build:gradle:3.4.2'
+                    classpath 'com.thunderhead.android:orchestration-plugin:1.0.1'
                 }
             }
-            repositories { maven { url 'https://jitpack.io' }}
-            apply plugin: 'com.archinamon.aspectj-ext'
-
-            ext.cdvBuildToolsVersion = '25.0.3'
-            
-            aspectj {
-               includeAspectsFromJar 'com.thunderhead'
-               weaveInfo true
-               debugInfo false
-               addSerialVersionUID false
-               noInlineAround false
-               ignoreErrors false
-               breakOnError true
-               experimental false
-               
-               transformLogFile 'ajc-transform.log'
-               compilationLogFile 'ajc-compile.log'
-            }
-            // One Cordova Plugin - End One Aspectj configuration`;
+            // One Cordova Plugin - End One SDK configuration`;
         
         utilities.writeBuildGradle(buildGradle);
         logger.log("One plugin: build.gradle config added");
@@ -52,7 +35,7 @@ module.exports = {
 
     removeOneBuildToolsFromGradle: function () {
         var buildGradle = utilities.readBuildGradle();
-        buildGradle = buildGradle.replace(/\n\s+\/\/ One Cordova Plugin - Start One Aspectj configuration[\s\S]*\/\/ One Cordova Plugin - End One Aspectj configuration/, "");
+        buildGradle = buildGradle.replace(/\n\s+\/\/ One Cordova Plugin - Start One SDK configuration[\s\S]*\/\/ One Cordova Plugin - End One SDK configuration/, "");
         utilities.writeBuildGradle(buildGradle);
     }
 };

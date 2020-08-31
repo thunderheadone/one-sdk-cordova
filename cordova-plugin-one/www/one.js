@@ -54,8 +54,8 @@ module.exports = {
 		exec(successCallback, errorCallback, "One", "handleURL", [url]);
 	},
 
-	enablePushNotifications : function(enable, senderId, successCallback, errorCallback) {
-		exec(successCallback, errorCallback, "One", "enablePushNotifications", [enable, senderId]);
+	enablePushNotifications : function(enable, successCallback, errorCallback) {
+		exec(successCallback, errorCallback, "One", "enablePushNotifications", [enable]);
 	},
 
 	getPushToken : function(successCallback, errorCallback) {

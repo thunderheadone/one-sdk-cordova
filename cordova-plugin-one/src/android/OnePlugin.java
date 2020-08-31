@@ -5,9 +5,6 @@ import android.util.Log;
 
 import com.thunderhead.One;
 import com.thunderhead.OneModes;
-import com.thunderhead.connectivity.entitys.responses.BaseResponse;
-import com.thunderhead.interfaces.GetCallback;
-import com.thunderhead.utils.ThunderheadException;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaArgs;
@@ -20,6 +17,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import com.thunderhead.OneSdkVersion;
+import com.thunderhead.android.infrastructure.server.responses.BaseResponse;
+import com.thunderhead.interfaces.GetCallback;
+import com.thunderhead.utils.ThunderheadError;
 
 
 /**
@@ -201,27 +201,11 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     boolean enable = args.optBoolean(0);
-                    String senderId = args.optString(1);
-                    one.enablePushNotifications(enable, senderId);
+                    one.enablePushNotifications(enable);
                     callbackContext.success();
                 }
             });
             return true;  
-        } else if ("identitySync".equals(action)) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    String stringURL = args.optString(0);
-                    URL url = null;
-                    try {
-                        url = new URL(stringURL);
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    }
-                    one.identitySync(url);
-                    callbackContext.success();
-                }
-            });
-            return true;
         } else if ("whitelistIdentityTransferLinks".equals(action)) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
@@ -337,10 +321,10 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
             Log.d(LOG_TAG, "Sending interaction: " + interactionPath + " with properties: " + propertiesMap);
             one.sendInteraction(interactionPath, propertiesMap, new GetCallback<BaseResponse>() {
                 @Override
-                public void done(BaseResponse response, ThunderheadException e) {
-                    if (e == null) {
+                public void done(BaseResponse baseResponse, ThunderheadError thunderheadError) {
+                    if (thunderheadError == null) {
                         try {
-                            JSONObject jsonObject = new JSONObject(response.toString());
+                            JSONObject jsonObject = new JSONObject(baseResponse.toString());
                             callbackContext.success(jsonObject);
                         }
                         catch (Exception exception) {
@@ -348,7 +332,7 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
                             callbackContext.error(exception.getLocalizedMessage());
                         }
                     } else {
-                        callbackContext.error(e.getErrorMessage());
+                        callbackContext.error(thunderheadError.getErrorMessage());
                     }
                 }
             });
