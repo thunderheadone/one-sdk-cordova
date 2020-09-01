@@ -2,7 +2,7 @@
 <plugin id="cordova-plugin-one" version="1.4.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
 	<name>cordova-plugin-one</name>
 	<description>One Cordova Plugin for the ONE SDK for iOS and Android</description>
-	<license>Copyright © 2017 Thunderhead. All rights reserved.</license>
+	<license>Copyright © 2020 Thunderhead. All rights reserved.</license>
 	
 	<js-module 
 		name="One" 
@@ -32,12 +32,13 @@
                 <param name="onload" value="true" />
             </feature>
         </config-file>
-
         <header-file src="src/ios/OnePlugin.h" />
         <source-file src="src/ios/OnePlugin.m" />
-        
-        <framework src="src/ios/Thunderhead.embeddedframework/Thunderhead.framework" custom="true"/>
-        <resource-file src="src/ios/Thunderhead.embeddedframework/ThunderheadBundle.bundle" />
+        <podspec>
+            <pods use-frameworks="true">
+                <pod name="Thunderhead" spec="~> 5.2.1" />
+            </pods>
+        </podspec>
     </platform>
     
     <!-- Android -->
