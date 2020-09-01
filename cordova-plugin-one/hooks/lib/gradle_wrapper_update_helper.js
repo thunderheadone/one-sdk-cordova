@@ -3,7 +3,7 @@ var path = require("path");
 var utilities = require("./utilities");
 var logger = require("console");
 
-const ONE_REQUIRED_GRADLE_VERSION = "5.2.1";
+const ONE_REQUIRED_GRADLE_VERSION = "6.1.1";
 const GRADLE_DISTRIBUTION_URL = "https\\://services.gradle.org/distributions/gradle-" + ONE_REQUIRED_GRADLE_VERSION + "-all.zip";
 
 function bumpGradleWrapperDistribUrl(url) {
