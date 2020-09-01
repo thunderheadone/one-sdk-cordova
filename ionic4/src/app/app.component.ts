@@ -29,11 +29,11 @@ export class AppComponent {
             apiKey: "f713d44a-8af0-4e79-ba7e-xxxxxxxxx",
             sharedSecret: "bb8bacb2-ffc2-4c52-aaf4-xxx",
             userId: "yourUsername@yourCompanyName",
-            hostName: "https://xx.thunderhead.com"
+            hostName: "https://xx.thunderhead.com",
             touchpointURI: "myAppsNameURI",
-            adminMode: false,
+            adminMode: false
           });
-          
+
           one.sendInteraction("/App", null, 
             function(response) {
               console.log(response)
@@ -42,7 +42,7 @@ export class AppComponent {
               console.log(error)
             }
           );
-          one.sendProperties({'/App', key:'value'}, 
+          one.sendProperties("/App", {key:'value'}, 
             function(response) {
               console.log(response)
             }, 
