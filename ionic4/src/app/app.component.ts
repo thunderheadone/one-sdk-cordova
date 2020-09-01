@@ -23,21 +23,49 @@ export class AppComponent {
     this.platform.ready().then(() => {
 
       var one = window.One;
-      
       if (one) {
           one.init({
-                  siteKey: "ONE-WSKWCQMKQI-1169",
-                  touchpointURI: "cordova",
-                  apiKey: "eff883bb-d4e5-4d0e-bba0-7c7094c3c112",
-                  sharedSecret: "f22413d6-1667-46e5-bfcb-e0f9c61cb445",
-                  userId: "apop@onedemo-presales",
-                  adminMode: false,
-                  hostName: "onedemo.thunderhead.com"
-                  }
-                  );
-          one.sendInteraction('/App', null);
-          one.sendBaseTouchpointProperties({key:'value'});
-          one.sendInteractionForOutboundLink('https://www.thunderhead.com/?key=value');
+            siteKey: "ONE-XXXXXXXXXX-1022",
+            apiKey: "f713d44a-8af0-4e79-ba7e-xxxxxxxxx",
+            sharedSecret: "bb8bacb2-ffc2-4c52-aaf4-xxx",
+            userId: "yourUsername@yourCompanyName",
+            hostName: "https://xx.thunderhead.com"
+            touchpointURI: "myAppsNameURI",
+            adminMode: false,
+          });
+          
+          one.sendInteraction("/App", null, 
+            function(response) {
+              console.log(response)
+            }, 
+            function(error) { 
+              console.log(error)
+            }
+          );
+          one.sendProperties({'/App', key:'value'}, 
+            function(response) {
+              console.log(response)
+            }, 
+            function(error) { 
+              console.log(error)
+            }
+          );
+          one.sendBaseTouchpointProperties({key:'value'}, 
+            function(response) {
+              console.log(response)
+            }, 
+            function(error) { 
+              console.log(error)
+            }
+          );
+          one.sendInteractionForOutboundLink('https://www.thunderhead.com/?key=value', 
+            function(response) {
+              console.log(response)
+            }, 
+            function(error) { 
+              console.log(error)
+            }
+          );
       }
 
       this.statusBar.styleDefault();
