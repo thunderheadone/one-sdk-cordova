@@ -54,8 +54,15 @@ export class UpdateItemPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    var one = window.One;  
-    one.sendInteraction('/update-item', null);
+    var one = window.One;
+    one.sendInteraction("/update-item", null, 
+      function(response) {
+        console.log(response)
+      }, 
+      function(error) { 
+        console.log(error)
+      }
+    );
   }
 
 }

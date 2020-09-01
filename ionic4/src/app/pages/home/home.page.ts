@@ -23,8 +23,14 @@ export class HomePage implements OnInit {
   }
 
   ionViewDidEnter() {
-    var one = window.One;  
-    one.sendInteraction('/home', null);
+    var one = window.One;
+    one.sendInteraction("/home", null, 
+      function(response) {
+        console.log(response)
+      }, 
+      function(error) { 
+        console.log(error)
+      }
+    );
   }
-  
 }

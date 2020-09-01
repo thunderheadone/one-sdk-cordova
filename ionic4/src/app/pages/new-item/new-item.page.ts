@@ -38,8 +38,15 @@ export class NewItemPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    var one = window.One;  
-    one.sendInteraction('/new-item', null);
+    var one = window.One;
+    one.sendInteraction("/new-item", null, 
+      function(response) {
+        console.log(response)
+      }, 
+      function(error) { 
+        console.log(error)
+      }
+    );
   }
 
 }
