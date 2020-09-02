@@ -1,6 +1,6 @@
-## Ionic 4 Angular Example 
+## Ionic 5 Angular Example 
 
-An Ionic 4 example to demonstrate how to integrate and use the Thunderhead Cordova Plugin.
+An Ionic 5 example to demonstrate how to integrate and use the Thunderhead Cordova Plugin.
 
 ### Install Thunderhead Cordova Plugin
 ```
