@@ -6,7 +6,7 @@ The Cordova Plugin for the ONE SDK for iOS and Android.
 ## Installation
 To install the ONE Cordova Plugin, navigate to your app’s folder and run the following command:
 ```sh
-$ cordova plugin add cordova-plugin-one --variable AUTOMATICIDENTITYTRANSFER=true
+$ cordova plugin add cordova-plugin-one
 ```
 ## Usage
 ### Initialization
