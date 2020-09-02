@@ -14,14 +14,6 @@ The master branch contains the released version. The develop branch contains the
 
 If you are looking to make updates or fork this, it is worth considering doing so based on the develop branch. 
 
-## TODOs
-- Update the sample apps to work with the latest platform specific releases 
-- Update the plugin to use the latest SDKs (follow the [iOS](https://github.com/thunderheadone/one-sdk-ios) and [Android](https://github.com/thunderheadone/one-sdk-android) SDK integration documentation for details)
-- Update the plugin to work with the latest platform specific releases  
-- Update the integration details 
-- Release a new version of the plugin - please create a PR if you are looking to do this and we can publish this accordingly
-
-
 ## Questions or need help
 
 ### Thunderhead ONE Support
