@@ -7,8 +7,6 @@ var path = require("path");
 var fs = require("fs");
 var console = require("console");
 
-const AUTOMATICIDENTITYTRANSFER = "automaticidentitytransfer";
-
 /**
  * Used to get the path to the build.gradle file for the Android project.
  *
@@ -37,16 +35,6 @@ module.exports = {
      */
     getPluginId: function () {
         return "cordova-plugin-one";
-    },
-
-    //Reads ONEASPECTSENABLED property value. This property is specified by a user in the time of the plugin installation
-    getOneAspectsEnabled: function (context) {
-        var projectPath = context.opts.projectRoot;
-        var applicationConfigPath = path.join(projectPath, "plugins", "fetch.json");
-        var pluginConfig = require(applicationConfigPath);
-        var oneAspectsEnabled = pluginConfig["cordova-plugin-one"].variables[AUTOMATICIDENTITYTRANSFER.toUpperCase()];
-        console.log("One plugin: automaticidentitytransfer state " + oneAspectsEnabled);
-        return "true" === oneAspectsEnabled;
     },
 
     /**

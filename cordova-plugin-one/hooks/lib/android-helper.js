@@ -6,11 +6,7 @@ var logger = require("console");
 module.exports = {
     // Appends a section to the build.gradle file of an android project
     addOneBuildToolsGradle: function (context) {
-        if (!utilities.getOneAspectsEnabled(context)) {
-            logger.log("One plugin: Aspect functionality wasn't enabled");
-            logger.log("One plugin: Skipping...")
-            return;
-        }
+
         logger.log("One plugin: Start adding build.gradle config...");
         var buildGradle = utilities.readBuildGradle();
         buildGradle +=
