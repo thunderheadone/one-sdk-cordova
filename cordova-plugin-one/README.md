@@ -20,7 +20,7 @@ To initialize the ONE Cordova Plugin, call the following method:
         userId:  <user-id>,
         adminMode:  <admin-mode>,
         hostName: <host-name>
-        };
+    };
 ```
 ### Send an Interaction 
 To send an Interaction request with properties, call the following method:
@@ -155,20 +155,6 @@ var onSendInteractionForLinkFailure = function(error) {
 };
 One.sendInteractionForOutboundLink(url, onSendInteractionForLinkSuccess, onSendInteractionForLinkFailure);
 ```
-###	Identity sync
-To perform identity sync with ONE, call the following public method:
-```javascript
-One.identitySync(null, function () {
-    console.log("The identity sync has been scheduled.");
-});
-```
-To perform identity sync with a web touchpoint, call the following public method by passing the web touchpoint’s URL:
-```javascript
-const url = "https://your-web-touchpoint-url";
-One.identitySync(url, function () {
-    console.log("The identity sync with " + url + "has been scheduled.");
-});
-```
 ###	Enable push notifications
 #### iOS integration
 To receive push notifications from ONE, take the following steps
@@ -188,85 +174,98 @@ var onError = function(error) {
 One.enablePushNotifications(true, onSuccess, onError);
 ```
 #### Android integration 
-To receive push notifications from ONE, ensure the correct dependencies have been added to the project and that you have followed the FCM or GCM instructions to be able to receive push notifications.
-##### Add dependencies to support push notifications
-To enable push notifications functionality you need to make the following gradle build updates: 
-1.	Add the messaging class path to your top-level build.gradle file, located in the root project directory, as shown below:
-```groovy
-buildscript {
-    repositories {
-        jcenter()
-        mavenCentral()
-        maven {}
+To receive push notifications from Thunderhead ONE or Salesforce Interaction Studio, Firebase Cloud Messaging (FCM) must be configured by following the FCM setup instructions.
+At minimum the app must be configured in Firebase and the `google-services.json` needs to be in the root of the app project.
+
+#### Minimum Gradle configuration
+To use the codeless push notifications functionality without using FCM directly, you need to at least have the `google-services` plugin applied to your app build.gradle:
+
+1. Add the Google Services Plugin to your classpath in the top-level build.gradle file, located in the root project directory, as shown below:
+    ```gradle
+    buildscript {
+        repositories {
+            google()
+            jcenter()
+            mavenCentral()
+        }
+        dependencies {
+            classpath 'com.android.tools.build:gradle:3.4.2'
+            // for cloud messaging support
+            classpath 'com.google.gms:google-services:4.2.0'
+        }
+    }
+    ```
+2.  Apply the Google Messaging Service plugin to the app-level build.gradle file, as shown below:
+
+    ```gradle
+    // place this at the bottom of your app build.gradle
+    apply plugin: 'com.google.gms.google-services'
+    ```
+
+    - The `Warning: The app gradle file must have a dependency on com.google.firebase:firebase-core for Firebase services to work as intended.`
+    can safely be ignored as this is not required for Push Notification Support.
+
+#### Enable codeless push notification support programmatically
+- For Firebase Cloud Messaging simply enable push notifications as shown below:
+    ```java
+    One one = One.getInstance(getApplicationContext());
+    one.enablePushNotifications(true);
+    ```
+*Note:*
+- When the Thunderhead SDK is the only push message provider in your application and you enable codeless push notification support,
+the SDK will automatically get the push token and handle receiving of push notifications on behalf of your app.
+
+##### Configure push notifications with multiple push message SDKs
+When the Thunderhead SDK is integrated into an App that has multiple push message providers for Firebase, extra configuration is required.
+The Thunderhead SDK message APIs must be called from the service that receives the FCM token and FCM Message.  
+
+```java
+// Call when a new FCM token is retrieved:
+One.getInstance(context).processMessagingToken(newToken);
+
+// Call when a new message is received from Firebase:
+One.getInstance(context).processMessage(message);
+```
+
+An example of a Firebase Messaging Service that calls the Thunderhead SDK messaging APIs:
+```java
+public final class FirebaseService extends FirebaseMessagingService {
+    private static final String TAG = "FirebaseService";
+
+    @Override
+    public void onMessageReceived(final RemoteMessage remoteMessage) {
+        super.onMessageReceived(remoteMessage);
+        try {
+            One.getInstance(getApplicationContext()).processMessage(remoteMessage);
+            // Call other Push Message SDKS.
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
     }
 
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0'
-        // for cloud messaging support
-        classpath 'com.google.gms:google-services:3.0.0'
-    }
-}
-
-allprojects {
-    repositories {
-        jcenter()
-        mavenCentral()
+    @Override
+    public void onNewToken(final String newToken) {
+        super.onNewToken(newToken);
+        try {
+            One.getInstance(getApplicationContext()).processMessagingToken(newToken);
+            // Call other Push Message SDKS.
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
     }
 }
 ```
-2.	Add the FCM or GCM dependencies and apply the Google Messaging Service plugin to the applications module-level build.gradle file, as shown below:
- - the FCM dependencies: 
-```groovy
-/**
-* This plugin should come first than com.android.application otherwise 
-* unexpected behaviour might be experienced - Source: http://stackoverflow.com/q/41010208
-*/
-apply plugin: 'com.google.gms.google-services'
 
-ext {
-    oneSupportLibVersion = "25.2.0"
-}
-dependencies {
-    compile project(path: ':Thunderhead_android_release_2.15.0')
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile "com.android.support:support-v4:${oneSupportLibVersion}"
-    compile "com.android.support:appcompat-v7:${oneSupportLibVersion}"
-    compile "com.android.support:recyclerview-v7:${oneSupportLibVersion}"
-    compile "com.android.support:design:${oneSupportLibVersion}"
-    compile 'oauth.signpost:signpost-jetty6:1.2.1.2'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    
-    // FCM dependencies
-    compile("com.google.firebase:firebase-messaging:10.0.1")
-    compile("com.google.android.gms:play-services-base:10.0.1") 
-}
-```
- - the GCM dependencies: 
-```javascript
-/**
-* This plugin should come first than com.android.application otherwise 
-* unexpected behaviour might be experienced - Source: http://stackoverflow.com/q/41010208
-*/
-apply plugin: 'com.google.gms.google-services'
+Do not forget to register the customer service (if required) that calls the Thunderhead SDK in the manifest:
 
-ext {
-    oneSupportLibVersion = "25.2.0"
-}
-dependencies {
-    compile project(path: ':Thunderhead_android_release_2.15.0')
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile "com.android.support:support-v4:${oneSupportLibVersion}"
-    compile "com.android.support:appcompat-v7:${oneSupportLibVersion}"
-    compile "com.android.support:recyclerview-v7:${oneSupportLibVersion}"
-    compile "com.android.support:design:${oneSupportLibVersion}"
-    compile 'oauth.signpost:signpost-jetty6:1.2.1.2'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    
-    // GCM dependencies
-    compile ("com.google.android.gms:play-services-gcm:10.0.1")
-}
+```xml
+
+<!-- The priority should be set to a high value in order to ensure this service receives the intent vs the other push provider SDKs -->
+ <service android:name="com.example.FirebaseService">
+    <intent-filter android:priority="100">
+        <action android:name="com.google.firebase.MESSAGING_EVENT" />
+    </intent-filter>
+</service>
 ```
 ###	Send a push token programmatically 
 To send a push token programmatically to ONE, call the following public method:
