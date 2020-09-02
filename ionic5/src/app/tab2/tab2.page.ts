@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+declare var window:any;
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -8,5 +10,17 @@ import { Component } from '@angular/core';
 export class Tab2Page {
 
   constructor() {}
+
+  ionViewDidEnter() {
+    var one = window.One;
+    one.sendInteraction("/tab2", null, 
+      function(response) {
+        console.log(response)
+      }, 
+      function(error) { 
+        console.log(error)
+      }
+    );
+  }
 
 }
