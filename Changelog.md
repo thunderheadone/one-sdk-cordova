@@ -1,5 +1,8 @@
 Version 1.4.0:
-    - [NEW] The plugin version and native SDK version will be now sent to ONE with each request made by the ONE SDK. 
+    - [NEW] Support for Ionic 4 and 5.
+    - [NEW] Added Ionic 4 and 5 example projects.
+    - [UPDATE] Updated Thunderhead Android SDK to v5.0.1.
+    - [UPDATE] Updated Thunderhead iOS SDK to v5.2.1.
     - [UPDATE] Updated the module README file. 
     - [BUGFIX] Resolved an issue where the get push token method was not returning the push token stored by the SDK.
 

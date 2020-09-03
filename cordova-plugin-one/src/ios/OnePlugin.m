@@ -3,7 +3,7 @@
 #import "Thunderhead/One.h"
 #import "OnePlugin.h"
 
-NSString * const kOneCordovaPluginVersion = @"1.3.1";
+// NSString * const kOneCordovaPluginVersion = @"1.4.0";
 
 @implementation OnePlugin
 
@@ -277,19 +277,6 @@ NSString * const kOneCordovaPluginVersion = @"1.3.1";
     [One blacklistIdentityTransferLinks:command.arguments];
     
     result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
-}
-
-- (void)identitySync:(CDVInvokedUrlCommand*)command
-{
-    NSURL *url = nil;
-    NSString *urlString = [command.arguments objectAtIndex:0];
-    if (urlString && [urlString isKindOfClass:[NSString class]]) {
-        url = [NSURL URLWithString:urlString];
-    }
-    
-    [One identitySyncWithURL:url];
-    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
