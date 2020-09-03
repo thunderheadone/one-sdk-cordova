@@ -1,7 +1,7 @@
 # cordova-plugin-one
 [![npm version](https://badge.fury.io/js/cordova-plugin-one.svg)](https://badge.fury.io/js/rcordova-plugin-one)
 
-The Cordova Plugin for the ONE SDK for iOS and Android.
+The ONE SDK Cordova Plugin for iOS and Android.
 
 ## Installation
 To install the ONE Cordova Plugin, navigate to your app’s folder and run the following command:
@@ -22,6 +22,8 @@ To initialize the ONE Cordova Plugin, call the following method:
         hostName: <host-name>
     };
 ```
+* See example of usage [here](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic5-angular-example/src/app/app.component.ts#L28)
+
 ### Send an Interaction 
 To send an Interaction request with properties, call the following method:
 ```javascript
@@ -31,6 +33,8 @@ To send an Interaction request without properties, call the following method:
 ```javascript
 One.sendInteraction("/interactionPath", {key: "value"});
 ```
+* See example of usage [here](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic5-angular-example/src/app/app.component.ts#L37)
+
 ### Send an Interaction with a Callback
 To send an Interaction request with a callback and properties, call the following public method:
 ```javascript
@@ -54,16 +58,22 @@ One.sendInteraction("/interactionPath", null,
     }
 );
 ```
+* See example of usage [here](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic5-angular-example/src/app/app.component.ts#L37)
+
 ### Send properties to an Interaction
 To send properties to a specific Interaction, call the following public method, passing in your JavaScript object containing your properties:
 ```javascript
 One.sendProperties("/interactionPath", {key:"value"});
 ```
+* See example of usage [here](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic5-angular-example/src/app/app.component.ts#L45)
+
 ### Send properties to a Base Touchpoint
 To send properties to a Base Touchpoint, call the following public method and pass in your JavaScript object containing your properties:
 ```javascript
 One.sendBaseTouchpointProperties({key:"value"});
 ```
+* See example of usage [here](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic5-angular-example/src/app/app.component.ts#L53)
+
 ### Get tid
 To get the tid for the current app, call the following public method:
 ```javascript
