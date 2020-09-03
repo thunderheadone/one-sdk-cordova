@@ -72,10 +72,6 @@ module.exports = {
 
 	blacklistIdentityTransferLinks : function(links, successCallback, errorCallback) {
 		exec(successCallback, errorCallback, "One", "blacklistIdentityTransferLinks", links);
-	},
-
-	identitySync : function(url, successCallback, errorCallback) {
-		exec(successCallback, errorCallback, "One", "identitySync", [url]);
 	}
 
 };
