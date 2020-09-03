@@ -2,6 +2,11 @@
   "name": "cordova-plugin-one",
   "version": "1.4.0",
   "description": "One Cordova Plugin for the ONE SDK for iOS and Android",
+  "homepage": "https://www.thunderhead.com/",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/thunderheadone/one-sdk-cordova"
+  },
   "cordova": {
     "id": "cordova-plugin-one",
     "platforms": [
