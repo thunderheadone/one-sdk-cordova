@@ -3,8 +3,8 @@ var path = require("path");
 var utilities = require("./utilities");
 var logger = require("console");
 
-const ONE_REQUIRED_GRADLE_VERSION = "3.3";
-const GRADLE_DISTRIBUTION_URL = "http\\://services.gradle.org/distributions/gradle-" + ONE_REQUIRED_GRADLE_VERSION + "-all.zip";
+const ONE_REQUIRED_GRADLE_VERSION = "6.1.1";
+const GRADLE_DISTRIBUTION_URL = "https\\://services.gradle.org/distributions/gradle-" + ONE_REQUIRED_GRADLE_VERSION + "-all.zip";
 
 function bumpGradleWrapperDistribUrl(url) {
     logger.log("One plugin: bumping gradle version to the required %s...", ONE_REQUIRED_GRADLE_VERSION);

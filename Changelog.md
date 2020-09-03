@@ -1,3 +1,11 @@
+Version 1.4.0:
+    - [NEW] Support for Ionic 4 and 5.
+    - [NEW] Added Ionic 4 and 5 example projects.
+    - [UPDATE] Updated Thunderhead Android SDK to v5.0.1.
+    - [UPDATE] Updated Thunderhead iOS SDK to v5.2.1.
+    - [UPDATE] Updated the module README file. 
+    - [BUGFIX] Resolved an issue where the get push token method was not returning the push token stored by the SDK.
+
 Version 1.3.0:
     - [NEW] Ability to track installs using pixel tracking
     - [NEW] Ability to programmatically send 'one-click' interaction for a URL in an Android app
