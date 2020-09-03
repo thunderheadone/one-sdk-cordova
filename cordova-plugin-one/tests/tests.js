@@ -12,7 +12,7 @@ exports.defineAutoTests = function() {
 	beforeAll(function() { 
 		One.init({
 					siteKey: "SITE-KEY",
-					touchpointURI: "myAppsNameURI",
+					touchpointURI: "cordova",
 					apiKey: "api-key",
 					sharedSecret: "shared-secret",
 					userId: "userid@company",
