@@ -15,7 +15,7 @@ To initialize the ONE Cordova Plugin, call the following method:
     One.init({
         siteKey: <site-key>,
         touchpointURI: <touchpoint-uri>,
-        apiKey: <api-key>
+        apiKey: <api-key>,
         sharedSecret:  <shared-secret>,
         userId:  <user-id>,
         adminMode:  <admin-mode>,
