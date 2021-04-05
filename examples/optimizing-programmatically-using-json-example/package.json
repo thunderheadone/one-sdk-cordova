@@ -54,8 +54,7 @@
     "cordova-plugin-device": "2.0.2",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-ionic-webview": "^4.0.0",
-    "cordova-plugin-ionic-keyboard": "^2.0.5",
-    "cordova-plugin-one": "1.5.0"
+    "cordova-plugin-ionic-keyboard": "^2.0.5"
   },
   "description": "An Ionic project",
   "cordova": {
@@ -65,8 +64,7 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-one": {}
+      "cordova-plugin-ionic-keyboard": {}
     }
   }
 }
