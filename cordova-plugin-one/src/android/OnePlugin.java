@@ -180,44 +180,6 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
                 }
             });
             return true;
-        } else if ("sendPushToken".equals(action)) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                 public void run() {
-                    String stringURL = args.optString(0);
-                    if (stringURL == null) {
-                        callbackContext.error("Passed string URL is null");
-                        return;
-                    }
-                    try {
-                        one.sendPushToken(stringURL);
-                        callbackContext.success();
-                    } catch (Exception e) {
-                        callbackContext.error("Failed to handle URL");
-                    }
-                }       
-            });
-            return true;
-        } else if ("getPushToken".equals(action)) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        String token = one.getPushToken();
-                        callbackContext.success(token);
-                    } catch (Exception e) {
-                        callbackContext.error("Failed to get push token");
-                    }
-                }
-            });
-            return true;
-        } else if ("enablePushNotifications".equals(action)) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    boolean enable = args.optBoolean(0);
-                    one.enablePushNotifications(enable);
-                    callbackContext.success();
-                }
-            });
-            return true;  
         } else if ("whitelistIdentityTransferLinks".equals(action)) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {

@@ -58,18 +58,6 @@ module.exports = {
 		exec(successCallback, errorCallback, "One", "handleURL", [url]);
 	},
 
-	enablePushNotifications : function(enable, successCallback, errorCallback) {
-		exec(successCallback, errorCallback, "One", "enablePushNotifications", [enable]);
-	},
-
-	getPushToken : function(successCallback, errorCallback) {
-		exec(successCallback, errorCallback, "One", "getPushToken", []);
-	},
-
-	sendPushToken : function(pushToken, successCallback, errorCallback) {
-		exec(successCallback, errorCallback, "One", "sendPushToken", [pushToken]);
-	},
-
 	whitelistIdentityTransferLinks : function(links, successCallback, errorCallback) {
 		exec(successCallback, errorCallback, "One", "whitelistIdentityTransferLinks", links);
 	},
