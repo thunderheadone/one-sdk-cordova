@@ -31,9 +31,6 @@ npm-debug.log
 # res
 resources/signing
 
-# Specifies intentionally untracked files to ignore when using Git
-# http://git-scm.com/docs/gitignore
-
 *~
 *.sw[mnpcod]
 .tmp
@@ -62,3 +59,16 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+
+examples/**/.idea
+examples/**/.ionic
+examples/**/.sass-cache
+examples/**/.sourcemaps
+examples/**/.versions
+examples/**/.vscode
+examples/**/coverage
+examples/**/dist
+examples/**/node_modules
+examples/**/platforms
+examples/**/plugins
+examples/**/www
