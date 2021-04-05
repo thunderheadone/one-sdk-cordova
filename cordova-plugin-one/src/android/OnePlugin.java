@@ -92,6 +92,18 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
                 }
             });
             return true;
+        } else if ("sendResponseCode".equals(action)) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        one.sendResponseCode(args.getString(0), args.optString(1));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Failed to send response code: " + e.getLocalizedMessage());
+                    }
+                }
+            });
+            return true;
         } else if ("getTid".equals(action)) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {

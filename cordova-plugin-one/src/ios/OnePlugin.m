@@ -43,6 +43,7 @@
                 CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
                 [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
             } else {
+                [One processResponse:response];
                 CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:response];
                 [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
             }
@@ -53,11 +54,24 @@
                 CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
                 [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
             } else {
+                [One processResponse:response];
                 CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:response];
                 [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
             }
         }];
     }
+}
+
+- (void)sendResponseCode:(CDVInvokedUrlCommand*)command
+{
+    NSString *responseCode = [command.arguments objectAtIndex:0];
+    NSString *interactionPath = [command.arguments objectAtIndex:1];
+    
+    if (!responseCode.length) {
+        return;
+    }
+    
+    [One sendResponseCode:responseCode forInteractionPath:interactionPath];
 }
 
 - (void)sendProperties:(CDVInvokedUrlCommand*)command

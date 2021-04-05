@@ -22,6 +22,10 @@ module.exports = {
 	    exec(successCallback, errorCallback, "One", "sendProperties", [interactionPath, properties]);
 	},
 
+	sendResponseCode : function(responseCode, interactionPath, successCallback, errorCallback) {
+	    exec(successCallback, errorCallback, "One", "sendResponseCode", [responseCode, interactionPath]);
+	},
+
 	sendBaseTouchpointProperties : function(properties, successCallback, errorCallback) {
 	    exec(successCallback, errorCallback, "One", "sendBaseTouchpointProperties", [properties]);
 	},
