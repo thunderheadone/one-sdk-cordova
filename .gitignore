@@ -60,15 +60,16 @@ npm-debug.log*
 /plugins
 /www
 
-examples/**/.idea
-examples/**/.ionic
-examples/**/.sass-cache
-examples/**/.sourcemaps
-examples/**/.versions
-examples/**/.vscode
-examples/**/coverage
-examples/**/dist
-examples/**/node_modules
-examples/**/platforms
-examples/**/plugins
+**/.idea
+**/.ionic
+**/.sass-cache
+**/.sourcemaps
+**/.versions
+**/.vscode
+**/coverage
+**/dist
+**/node_modules
+**/platforms
+**/plugins
 examples/**/www
+ionic.*/**/www
