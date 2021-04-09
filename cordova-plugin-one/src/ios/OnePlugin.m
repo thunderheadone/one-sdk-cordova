@@ -28,6 +28,12 @@
     [One disableAutomaticInteractionDetection:YES];
 }
 
+- (void)optOut:(CDVInvokedUrlCommand*)command
+{
+    BOOL optOut = [[command.arguments objectAtIndex:0] boolValue];
+    [One opt:optOut ? Out : In forOptions:AllTracking];
+}
+
 - (void)sendInteraction:(CDVInvokedUrlCommand*)command
 {
     NSString *interactionPath = [command.arguments objectAtIndex:0];
