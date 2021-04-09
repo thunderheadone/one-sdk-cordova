@@ -16,11 +16,15 @@ module.exports = {
                 repositories {
                     google()
                     jcenter()
+                    maven {
+                        name 'ThunderheadSpringMilestone'
+                        url = 'https://repo.spring.io/milestone'
+                    }
                     maven { url 'https://thunderhead.mycloudrepo.io/public/repositories/one-sdk-android' }
                 }
                 dependencies {
-                    classpath 'com.android.tools.build:gradle:3.4.2'
-                    classpath 'com.thunderhead.android:orchestration-plugin:1.0.1'
+                    classpath 'com.android.tools.build:gradle:3.6.4'
+                    classpath 'com.thunderhead.android:orchestration-plugin:4.0.0'
                 }
             }
             // One Cordova Plugin - End One SDK configuration`;
