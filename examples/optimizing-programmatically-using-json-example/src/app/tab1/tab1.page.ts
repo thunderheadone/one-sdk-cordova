@@ -33,18 +33,17 @@ export class Tab1Page {
       one = window.One;
 
       one.sendInteraction("/tab1", null,
-      (response) => {
-        console.log("::tab1 Send Interaction response: ", response)
-        this.optimizeContent(response)
-      },
-      (error) => {
-        console.log("::tab1 Send Interaction error: ", error)
-
-        this.zone.run(() => {
-          this.images = IMAGES
-        });
-      }
-    );
+        (response) => {
+          console.log("::tab1 Send Interaction response: ", response)
+          this.optimizeContent(response)
+        },
+        (error) => {
+          console.log("::tab1 Send Interaction error: ", error)
+          this.zone.run(() => {
+            this.images = IMAGES
+          });
+        }
+      );
     });
   }
 
