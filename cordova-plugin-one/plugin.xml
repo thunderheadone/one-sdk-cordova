@@ -34,6 +34,15 @@
         </config-file>
         <header-file src="src/ios/OnePlugin.h" />
         <source-file src="src/ios/OnePlugin.m" />
+        <config-file target="*-Info.plist" parent="Thunderhead Config">
+            <dict>
+                <key>Swizzling Options</key>
+            <dict>
+                <key>DisableWKWebViewTracking</key>
+                <true/>
+            </dict>
+        </dict>
+        </config-file>
         <podspec>
             <config>
                 <source url="https://github.com/CocoaPods/Specs.git"/>
