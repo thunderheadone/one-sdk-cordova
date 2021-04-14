@@ -290,11 +290,6 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
         .build();
     One.setCodelessInteractionTrackingConfiguration(codelessInteractionTrackingConfiguration);
 
-    final OneOptOutConfiguration optOutConfiguration = new OneOptOutConfiguration.Builder()
-      .optOut(false)
-      .build();
-    One.setOptOutConfiguration(optOutConfiguration);
-
     final OneConfiguration oneConfiguration = new OneConfiguration.Builder()
       .siteKey(siteKey)
       .apiKey(apiKey)
