@@ -34,6 +34,10 @@ module.exports = {
 	    exec(successCallback, errorCallback, "One", "getTid", []);
 	},
 
+	optOut : function(optOut, successCallback, errorCallback) {
+	    exec(successCallback, errorCallback, "One", "optOut", optOut);
+	},
+
 	clearUserProfile : function(successCallback, errorCallback) {
 	    exec(successCallback, errorCallback, "One", "clearUserProfile", []);
 	},
