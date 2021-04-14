@@ -10,9 +10,12 @@ $ cordova plugin add cordova-plugin-one
 ```
 ## Usage
 ### Initialization
-To initialize the ONE Cordova Plugin, call the following method:
+To initialize the ONE Cordova Plugin, fetch the `One` instance from the window and call the following method:
 ```javascript
-    One.init({
+    declare var window:any;
+
+    var one = window.One;
+    one.init({
         siteKey: <site-key>,
         touchpointURI: <touchpoint-uri>,
         apiKey: <api-key>,
@@ -164,6 +167,18 @@ var onSendInteractionForLinkFailure = function(error) {
     console.log(error);
 };
 One.sendInteractionForOutboundLink(url, onSendInteractionForLinkSuccess, onSendInteractionForLinkFailure);
+```
+
+#### Opt an end-user out of tracking
+To opt an end-user out of tracking, when the end-user does not give permission to be tracked in the client app, call the following public method:
+```javascript
+One.optOut(true);
+```
+
+##### Additional opt out options
+On iOS, to opt out an end-user of all keychain Tid storage, call the opt method as shown below:
+```javascript 
+One.optout(true, ['keychainTidStorage']);
 ```
 
 ## Plugin removal
