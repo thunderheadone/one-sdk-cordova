@@ -9,6 +9,7 @@ Thunderhead Cordova Plugin for apps built using Cordova, PhoneGap or Ionic. This
 	* [ionic3-angular-example](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic3-angular-example)
 	* [ionic4-angular-example](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic4-angular-example)
 	* [ionic5-angular-example](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic5-angular-example)
+	* [optimizing-programmatically-using-json-example](https://github.com/thunderheadone/one-sdk-cordova/tree/master/examples/optimizing-programmatically-using-json-example)
 
 ## Questions or need help
 

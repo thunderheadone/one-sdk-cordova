@@ -12,19 +12,19 @@ $ ionic cordova plugin add cordova-plugin-one
 
 ```
 $ ionic cordova platform add ios
-$ ionic cordova run ios --emulator
+$ ionic cordova emulate ios
 ```
 
 ### Start Ionic app in Android
 
 ```
 $ ionic cordova platform add android
-$ ionic cordova run android --emulator
+$ ionic cordova emulate android
 ```
 
 ### Start Ionic app in browser.
 ```
-ionic serve
+$ ionic serve
 ```
 
 ## Questions or need help
