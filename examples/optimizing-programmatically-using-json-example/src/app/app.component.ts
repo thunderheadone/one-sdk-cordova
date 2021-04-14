@@ -30,6 +30,9 @@ export class AppComponent {
           touchpointURI: "ionic://optimization-example",
           adminMode: false
         });
+
+        // Uncomment to opt out of all tracking
+        // one.optOut(true);
       }
     });
   }
