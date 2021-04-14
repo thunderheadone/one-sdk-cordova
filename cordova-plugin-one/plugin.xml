@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-one" version="1.5.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+<plugin id="cordova-plugin-one" version="2.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
 	<name>cordova-plugin-one</name>
 	<description>One Cordova Plugin for the ONE SDK for iOS and Android</description>
 	<license>Copyright © 2021 Thunderhead. All rights reserved.</license>
