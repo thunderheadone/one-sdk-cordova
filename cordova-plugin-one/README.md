@@ -25,6 +25,18 @@ The ONE SDK Cordova Plugin for iOS and Android.
     * [Clear the User Profile](#clear-the-user-profile)
 * [Plugin removal](#plugin-removal)
 
+## Requirements
+The native Thunderhead SDKs require the following mininum versions:
+
+### iOS version requirements
++ iOS minimum version (deployment target): iOS 9.0
++ iOS base SDK version: iOS 14.3
+
+### Android version requirements
++ [Android Gradle Plugin](https://developer.android.com/studio/releases/gradle-plugin) 3.6.x
++ Android 5.0+ (API 21) and above
++ [Gradle](https://gradle.org/releases/) 5.6.4
+
 ## Installation
 To install the ONE Cordova Plugin, navigate to your app’s folder and run the following command:
 ```sh
