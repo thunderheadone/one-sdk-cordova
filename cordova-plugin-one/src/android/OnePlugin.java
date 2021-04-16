@@ -53,7 +53,7 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
           HashMap<String, String> propertiesMap = getPropertiesFromJSONObject(jsonObject);
           sendInteraction(args.getString(0), propertiesMap, callbackContext);
         } catch (Exception e) {
-          e.printStackTrace();
+          Log.e(LOG_TAG, "Failed to send properties.", e);
           callbackContext.error("Failed to send properties: " + e.getLocalizedMessage());
         }
       });
@@ -67,7 +67,7 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
             .build();
           One.setOptOutConfiguration(optOutConfiguration);
         } catch (Exception e) {
-          e.printStackTrace();
+          Log.e(LOG_TAG, "Failed to opt out.", e);
           callbackContext.error("Failed to opt out: " + e.getLocalizedMessage());
         }
       });
@@ -88,7 +88,7 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
             callbackContext.error("No properties to send");
           }
         } catch (Exception e) {
-          e.printStackTrace();
+          Log.e(LOG_TAG, "Failed to send properties.", e);
           callbackContext.error("Failed to send properties: " + e.getLocalizedMessage());
         }
       });
@@ -106,7 +106,7 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
               callbackContext.error("No base Touchpoint properties to send");
             }
           } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(LOG_TAG, "Failed to send base Touchpoint properties.", e);
             callbackContext.error("Failed to send base Touchpoint properties: " + e.getLocalizedMessage());
           }
         }
@@ -122,7 +122,7 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
               .build();
             One.sendResponseCode(request).enqueue(null);
           } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(LOG_TAG, "Failed to send response code.", e);
             callbackContext.error("Failed to send response code: " + e.getLocalizedMessage());
           }
         }
@@ -155,7 +155,7 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
             URL url = new URL(stringURL);
             sendInteractionForOutboundLink(url);
           } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(LOG_TAG, "Failed to send interaction for outbound link.", e);
             callbackContext.error("Failed to send interaction for outbound link: " + e.getLocalizedMessage());
           }
         }
@@ -252,7 +252,7 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
 
           init(siteKey, touchpointURI, apiKey, sharedSecret, userId, adminMode, host);
         } catch (Exception e) {
-          e.printStackTrace();
+          Log.e(LOG_TAG, "Failed to configure the SDK.", e);
         }
       }
     });
@@ -409,7 +409,7 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
     try {
       url = One.createUrlWithTid(new URL(stringURL));
     } catch (MalformedURLException e) {
-      e.printStackTrace();
+      Log.e(LOG_TAG, "Failed to create URL with tid.", e);
     }
     return url;
   }
@@ -429,7 +429,7 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
             propertiesMap.put(key, value.toString());
           }
         } catch (Exception e) {
-          e.printStackTrace();
+          Log.e(LOG_TAG, "Failed to get properties from JSON object.", e);
         }
       }
       return propertiesMap;
