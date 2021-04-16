@@ -44,7 +44,7 @@ System:
 
 	*Note:* Skip `Step 1` in the guide as you'll be using this Ionic example app instead.
 
-2. Navigate to `app.component.ts` and input your ONE credentials.
+2. Open `app.component.ts` and input your ONE credentials.
 
 	```
 	one.init({
@@ -58,38 +58,41 @@ System:
 	});
 	```
 
-3. Install Thunderhead Cordova Plugin
+3. Install Node dependencies
 
 	```
 	$ npm install
-	$ ionic cordova plugin add cordova-plugin-one
 	```
 
-### Start Ionic app in iOS
+4. Install Thunderhead Cordova Plugin
+  ```
+  // installs from npm
+  $ ionic cordova plugin add cordova-plugin-one       
+  OR 
+  // installs from file reference
+  $ ionic cordova plugin add ../../cordova-plugin-one 
+  ```
 
+### Start the Ionic app in iOS or Android
+You can find the respective project files located in the `platforms` folder from the project directory to open and run with Xcode and/or Android Studio.
+
+To run the project in Terminal, run the following commands from the project directory.
 ```
+// iOS
 $ ionic cordova platform add ios
 $ ionic cordova emulate ios
 ```
 
-### Start Ionic app in Android
-
 ```
+// Android
 $ ionic cordova platform add android
 $ ionic cordova emulate android
-```
-
-### Start Ionic app in browser.
-
-```
-$ ionic serve
 ```
 
 ## Questions or need help
 
 ### Thunderhead ONE Support
 _The Thunderhead team is available 24/7 to answer any questions you have. Just email onesupport@thunderhead.com or visit our docs page for more detailed installation and usage information._
-
 
 ### Salesforce Interaction Studio Support
 _For Salesforce Marketing Cloud Interaction Studio questions, please submit a support ticket via https://help.salesforce.com/home_
