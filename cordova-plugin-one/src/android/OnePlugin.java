@@ -47,192 +47,146 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
     if ("initializeOne".equals(action)) {
       return initializeOne(args, callbackContext);
     } else if ("sendInteraction".equals(action)) {
-      cordova.getActivity().runOnUiThread(() -> {
-        try {
-          JSONObject jsonObject = args.optJSONObject(1);
-          HashMap<String, String> propertiesMap = getPropertiesFromJSONObject(jsonObject);
-          sendInteraction(args.getString(0), propertiesMap, callbackContext);
-        } catch (Exception e) {
-          Log.e(LOG_TAG, "Failed to send properties.", e);
-          callbackContext.error("Failed to send properties: " + e.getLocalizedMessage());
-        }
-      });
+      try {
+        JSONObject jsonObject = args.optJSONObject(1);
+        HashMap<String, String> propertiesMap = getPropertiesFromJSONObject(jsonObject);
+        sendInteraction(args.getString(0), propertiesMap, callbackContext);
+      } catch (Exception e) {
+        Log.e(LOG_TAG, "Failed to send properties.", e);
+        callbackContext.error("Failed to send properties: " + e.getLocalizedMessage());
+      }
       return true;
     } else if ("optOut".equals(action)) {
-      cordova.getActivity().runOnUiThread(() -> {
-        try {
-          boolean optOut = args.getBoolean(0);
-          final OneOptOutConfiguration optOutConfiguration = new OneOptOutConfiguration.Builder()
-            .optOut(optOut)
-            .build();
-          One.setOptOutConfiguration(optOutConfiguration);
-        } catch (Exception e) {
-          Log.e(LOG_TAG, "Failed to opt out.", e);
-          callbackContext.error("Failed to opt out: " + e.getLocalizedMessage());
-        }
-      });
+      try {
+        boolean optOut = args.getBoolean(0);
+        final OneOptOutConfiguration optOutConfiguration = new OneOptOutConfiguration.Builder()
+          .optOut(optOut)
+          .build();
+        One.setOptOutConfiguration(optOutConfiguration);
+      } catch (Exception e) {
+        Log.e(LOG_TAG, "Failed to opt out.", e);
+        callbackContext.error("Failed to opt out: " + e.getLocalizedMessage());
+      }
       return true;
     } else if ("sendProperties".equals(action)) {
-      cordova.getActivity().runOnUiThread(() -> {
-        try {
-          JSONObject jsonObject = args.optJSONObject(1);
-          if (jsonObject == null) {
-            callbackContext.error("No properties to send");
-            return;
-          }
-          HashMap<String, String> propertiesMap = getPropertiesFromJSONObject(jsonObject);
-          if (propertiesMap != null && propertiesMap.size() > 0) {
-            sendProperties(args.getString(0), propertiesMap);
-            callbackContext.success();
-          } else {
-            callbackContext.error("No properties to send");
-          }
-        } catch (Exception e) {
-          Log.e(LOG_TAG, "Failed to send properties.", e);
-          callbackContext.error("Failed to send properties: " + e.getLocalizedMessage());
+      try {
+        JSONObject jsonObject = args.optJSONObject(1);
+        if (jsonObject == null) {
+          callbackContext.error("No properties to send");
+          return true;
         }
-      });
+        HashMap<String, String> propertiesMap = getPropertiesFromJSONObject(jsonObject);
+        if (propertiesMap != null && propertiesMap.size() > 0) {
+          sendProperties(args.getString(0), propertiesMap);
+          callbackContext.success();
+        } else {
+          callbackContext.error("No properties to send");
+        }
+      } catch (Exception e) {
+        Log.e(LOG_TAG, "Failed to send properties.", e);
+        callbackContext.error("Failed to send properties: " + e.getLocalizedMessage());
+      }
       return true;
     } else if ("sendBaseTouchpointProperties".equals(action)) {
-      cordova.getActivity().runOnUiThread(new Runnable() {
-        public void run() {
-          try {
-            JSONObject jsonObject = args.getJSONObject(0);
-            HashMap<String, String> propertiesMap = getPropertiesFromJSONObject(jsonObject);
-            if (propertiesMap != null && propertiesMap.size() > 0) {
-              sendBaseTouchpointProperties(propertiesMap);
-              callbackContext.success();
-            } else {
-              callbackContext.error("No base Touchpoint properties to send");
-            }
-          } catch (Exception e) {
-            Log.e(LOG_TAG, "Failed to send base Touchpoint properties.", e);
-            callbackContext.error("Failed to send base Touchpoint properties: " + e.getLocalizedMessage());
-          }
+      try {
+        JSONObject jsonObject = args.getJSONObject(0);
+        HashMap<String, String> propertiesMap = getPropertiesFromJSONObject(jsonObject);
+        if (propertiesMap != null && propertiesMap.size() > 0) {
+          sendBaseTouchpointProperties(propertiesMap);
+          callbackContext.success();
+        } else {
+          callbackContext.error("No base Touchpoint properties to send");
         }
-      });
+      } catch (Exception e) {
+        Log.e(LOG_TAG, "Failed to send base Touchpoint properties.", e);
+        callbackContext.error("Failed to send base Touchpoint properties: " + e.getLocalizedMessage());
+      }
       return true;
     } else if ("sendResponseCode".equals(action)) {
-      cordova.getActivity().runOnUiThread(new Runnable() {
-        public void run() {
-          try {
-            OneResponseCodeRequest request = new OneResponseCodeRequest.Builder()
-              .interactionPath(new OneInteractionPath(URI.create(args.optString(1))))
-              .responseCode(new OneResponseCode(args.getString(0)))
-              .build();
-            One.sendResponseCode(request).enqueue(null);
-          } catch (Exception e) {
-            Log.e(LOG_TAG, "Failed to send response code.", e);
-            callbackContext.error("Failed to send response code: " + e.getLocalizedMessage());
-          }
-        }
-      });
+      try {
+        OneResponseCodeRequest request = new OneResponseCodeRequest.Builder()
+          .interactionPath(new OneInteractionPath(URI.create(args.optString(1))))
+          .responseCode(new OneResponseCode(args.getString(0)))
+          .build();
+        One.sendResponseCode(request).enqueue(null);
+      } catch (Exception e) {
+        Log.e(LOG_TAG, "Failed to send response code.", e);
+        callbackContext.error("Failed to send response code: " + e.getLocalizedMessage());
+      }
       return true;
     } else if ("getTid".equals(action)) {
-      cordova.getActivity().runOnUiThread(new Runnable() {
-        public void run() {
-          callbackContext.success(getTid());
-        }
-      });
+      callbackContext.success(getTid());
       return true;
     } else if ("clearUserProfile".equals(action)) {
-      cordova.getActivity().runOnUiThread(new Runnable() {
-        public void run() {
-          clearUserProfile();
-          if (getTid() == null || getTid().length() == 0) {
-            callbackContext.success();
-          } else {
-            callbackContext.error("Failed to clear user profile");
-          }
-        }
-      });
+      clearUserProfile();
+      if (getTid() == null || getTid().length() == 0) {
+        callbackContext.success();
+      } else {
+        callbackContext.error("Failed to clear user profile");
+      }
       return true;
     } else if ("sendInteractionForOutboundLink".equals(action)) {
-      cordova.getActivity().runOnUiThread(new Runnable() {
-        public void run() {
-          try {
-            String stringURL = args.optString(0);
-            URL url = new URL(stringURL);
-            sendInteractionForOutboundLink(url);
-          } catch (Exception e) {
-            Log.e(LOG_TAG, "Failed to send interaction for outbound link.", e);
-            callbackContext.error("Failed to send interaction for outbound link: " + e.getLocalizedMessage());
-          }
-        }
-      });
+      try {
+        String stringURL = args.optString(0);
+        URL url = new URL(stringURL);
+        sendInteractionForOutboundLink(url);
+      } catch (Exception e) {
+        Log.e(LOG_TAG, "Failed to send interaction for outbound link.", e);
+        callbackContext.error("Failed to send interaction for outbound link: " + e.getLocalizedMessage());
+      }
       return true;
     } else if ("getURLWithOneTid".equals(action)) {
-      cordova.getActivity().runOnUiThread(new Runnable() {
-        public void run() {
-          String stringURL = args.optString(0);
-          if (stringURL == null) {
-            callbackContext.error("Passed string URL is null");
-            return;
-          }
-          URL urlWithTid = getURLWithOneTid(stringURL);
-          if (urlWithTid != null) {
-            callbackContext.success(urlWithTid.toString());
-          } else {
-            callbackContext.error("Failed to create an URL with tid");
-          }
-        }
-      });
+      String stringURL = args.optString(0);
+      if (stringURL == null) {
+        callbackContext.error("Passed string URL is null");
+        return true;
+      }
+      URL urlWithTid = getURLWithOneTid(stringURL);
+      if (urlWithTid != null) {
+        callbackContext.success(urlWithTid.toString());
+      } else {
+        callbackContext.error("Failed to create an URL with tid");
+      }
       return true;
     } else if ("disableIdentityTransfer".equals(action)) {
-      cordova.getActivity().runOnUiThread(new Runnable() {
-        public void run() {
-          boolean disable = args.optBoolean(0);
-          final OneIdentityTransferConfiguration identityTransferConfiguration =
-            new OneIdentityTransferConfiguration.Builder()
-              .disableIdentityTransfer(disable)
-              .build();
-          One.setIdentityTransferConfiguration(identityTransferConfiguration);
-          callbackContext.success();
-        }
-      });
+      boolean disable = args.optBoolean(0);
+      final OneIdentityTransferConfiguration identityTransferConfiguration =
+        new OneIdentityTransferConfiguration.Builder()
+          .disableIdentityTransfer(disable)
+          .build();
+      One.setIdentityTransferConfiguration(identityTransferConfiguration);
+      callbackContext.success();
       return true;
     } else if ("handleURL".equals(action)) {
-      cordova.getActivity().runOnUiThread(new Runnable() {
-        public void run() {
-          String stringURL = args.optString(0);
-          if (stringURL == null) {
-            callbackContext.error("Passed string URL is null");
-            return;
-          }
-          try {
-            One.processDeepLink(URI.create(stringURL));
-            callbackContext.success();
-          } catch (Exception e) {
-            callbackContext.error("Failed to handle URL");
-          }
-        }
-      });
+      String stringURL = args.optString(0);
+      if (stringURL == null) {
+        callbackContext.error("Passed string URL is null");
+        return true;
+      }
+      try {
+        One.processDeepLink(URI.create(stringURL));
+        callbackContext.success();
+      } catch (Exception e) {
+        callbackContext.error("Failed to handle URL");
+      }
       return true;
     } else if ("whitelistIdentityTransferLinks".equals(action)) {
-      cordova.getActivity().runOnUiThread(new Runnable() {
-        public void run() {
-          HashSet<URI> links = getStringListFromCordovaArgs(args);
-          if (links.size() > 0) {
-            One.setIdentityTransferLinksWhiteList(links);
-            callbackContext.success();
-          } else {
-            callbackContext.error("The SDK cannot whitelist any links as no links were provided.");
-          }
-        }
-      });
+      HashSet<URI> links = getStringListFromCordovaArgs(args);
+      if (links.size() > 0) {
+        One.setIdentityTransferLinksWhiteList(links);
+        callbackContext.success();
+      } else {
+        callbackContext.error("The SDK cannot whitelist any links as no links were provided.");
+      }
       return true;
     } else if ("blacklistIdentityTransferLinks".equals(action)) {
-      cordova.getActivity().runOnUiThread(new Runnable() {
-        public void run() {
-          HashSet<URI> links = getStringListFromCordovaArgs(args);
-          if (links.size() > 0) {
-            One.setIdentityTransferLinksBlackList(links);
-            callbackContext.success();
-          } else {
-            callbackContext.error("The SDK cannot blacklist any links as no links were provided.");
-          }
-        }
-      });
+      HashSet<URI> links = getStringListFromCordovaArgs(args);
+      if (links.size() > 0) {
+        One.setIdentityTransferLinksBlackList(links);
+        callbackContext.success();
+      } else {
+        callbackContext.error("The SDK cannot blacklist any links as no links were provided.");
+      }
       return true;
     }
     return false;
