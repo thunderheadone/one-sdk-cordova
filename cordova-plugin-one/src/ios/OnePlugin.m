@@ -33,19 +33,24 @@
     BOOL optOut = [[command.arguments objectAtIndex:0] boolValue];
     NSArray *options = [command.arguments objectAtIndex:1];
 
-    if (options != nil && options.count) {
-        for (NSString *option in options) {
-            NSString *lowercasedOpt = [option lowercaseString];
-            if ([lowercasedOpt isEqualToString:[@"keychainTidStorage" lowercaseString]]) {
-                [One opt:optOut forOptions:KeychainTidStorage];
-            } else if ([lowercasedOpt isEqualToString:[@"pasteboardTidStorage" lowercaseString]]) {
-                [One opt:optOut forOptions:PasteboardTidStorage];
-            } else if ([lowercasedOpt isEqualToString:[@"cityCountryDetection" lowercaseString]]) {
-                [One opt:optOut forOptions:CityCountryDetection];
-            } else if ([lowercasedOpt isEqualToString:[@"allTracking" lowercaseString]]) {
-                [One opt:optOut forOptions:AllTracking];
+    if (![options isKindOfClass:[NSNull class]] && [options isKindOfClass:[NSArray class]]) {
+        if (options.count) {
+            for (NSString *option in options) {
+                NSString *lowercasedOpt = [option lowercaseString];
+                if ([lowercasedOpt isEqualToString:[@"keychainTidStorage" lowercaseString]]) {
+                    [One opt:optOut ? Out : In forOptions:KeychainTidStorage];
+                } else if ([lowercasedOpt isEqualToString:[@"pasteboardTidStorage" lowercaseString]]) {
+                    [One opt:optOut ? Out : In forOptions:PasteboardTidStorage];
+                } else if ([lowercasedOpt isEqualToString:[@"cityCountryDetection" lowercaseString]]) {
+                    [One opt:optOut ? Out : In forOptions:CityCountryDetection];
+                } else if ([lowercasedOpt isEqualToString:[@"allTracking" lowercaseString]]) {
+                    [One opt:optOut ? Out : In forOptions:AllTracking];
+                }
             }
+        } else {
+            [One opt:optOut ? Out : In forOptions:AllTracking];
         }
+    
     } else {
         [One opt:optOut ? Out : In forOptions:AllTracking];
     }
