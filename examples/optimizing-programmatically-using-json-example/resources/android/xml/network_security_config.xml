@@ -3,6 +3,8 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">localhost</domain>
     </domain-config>
+
+    <!--Configuration for Charles-->
     <base-config>
         <trust-anchors>
             <certificates src="user" />
