@@ -4,6 +4,9 @@
 The ONE SDK Cordova Plugin for iOS and Android.
 
 ## Table of Contents
+* [Requirements](#requirements)
+    * [iOS version requirements](#ios-version-requirements)
+    * [Android version requirements](#android-version-requirements)
 * [Installation](#installation)
 * [Configure the Thunderhead SDK](#configure-the-thunderhead-sdk)
 * [Additional features](#additional-features)
@@ -27,6 +30,11 @@ The ONE SDK Cordova Plugin for iOS and Android.
 
 ## Requirements
 The native Thunderhead SDKs require the following mininum versions:
+
++ cordova >= 9.0.0
++ cordova-ios >= 6.1.0
++ cordova-android >= 9.0.0
++ cococapods >= 1.9
 
 ### iOS version requirements
 + iOS minimum version (deployment target): iOS 9.0
@@ -75,7 +83,7 @@ One.optOut(true);
 #### Opt an end-uer out of keychain Tid storage on iOS 
 On iOS, to opt out an end-user of all keychain Tid storage, call the opt method as shown below:
 ```javascript 
-One.optout(true, ['keychainTidStorage']);
+One.optOut(true, ['keychainTidStorage']);
 ```
 
 ### Send an Interaction 
