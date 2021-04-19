@@ -302,7 +302,7 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
           callbackContext.success(jsonObject);
         } catch (Exception e) {
           Log.e(LOG_TAG, "Failed to send Interaction", e);
-          callbackContext.error(exception.getLocalizedMessage());
+          callbackContext.error(e.getLocalizedMessage());
         }
       }
 
