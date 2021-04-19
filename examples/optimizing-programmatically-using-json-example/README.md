@@ -44,18 +44,41 @@ System:
 
 	*Note:* Skip `Step 1` in the guide as you'll be using this Ionic example app instead.
 
-2. Open `app.component.ts` and input your ONE credentials.
+2. Open `app.component.ts`, declare a `window` variable and configure ONE when platform is ready. 
+  * To find your ONE credentials, see [Find the Information required when Integrating ONE with your Mobile App](https://na5.thunderhead.com/one/help/conversations/how-do-i/mobile/one_integrate_mobile_find_integration_info/)
 
-	```
-	one.init({
-	  siteKey: "ONE-M9HVDYLBYY-XXXX",
-	  apiKey: "eff883bb-d4e5-4d0e-bba0-xxxxx",
-	  sharedSecret: "f22413d6-1667-46e5-bfcb-xxxxxx",
-	  userId: "user@domain",
-	  hostName: "https://xxx.thunderhead.com",
-	  touchpointURI: "optimization-example",  
-	  adminMode: false
-	});
+	```javascript
+  import { Component } from '@angular/core';
+  import { Platform } from '@ionic/angular';
+
+  declare var window;
+  ...
+
+  export class AppComponent {
+    constructor(private platform: Platform) {
+      this.initializeOne();
+    }
+
+    private initializeOne() {
+      // The platform is ready and native functionality can be called.
+      // https://ionicframework.com/docs/angular/platform#ready-promise-string-
+      this.platform.ready().then(() => {
+        var one = window.One;
+
+        if (one) {
+          one.init({
+            siteKey: "ONE-XXXXXXXXXX-1022",
+            apiKey: "f713d44a-8af0-4e79-ba7e-xxxxxxxxxxxxxxxx",
+            sharedSecret: "bb8bacb2-ffc2-4c52-aaf4-xxxxxxxxxxxxxxxx",
+            userId: "api@yourCompanyName",
+            hostName: "https://xx.thunderhead.com",
+            touchpointURI: "ionic://optimization-example",
+            adminMode: false
+          });
+        }
+      });
+    }
+  }
 	```
 
 3. Install Node dependencies

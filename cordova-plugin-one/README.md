@@ -52,23 +52,42 @@ $ cordova plugin add cordova-plugin-one
 ```
 
 ## Configure the Thunderhead SDK
-
-To configure the ONE Cordova Plugin, call the following method:
-```javascript
-    declare var window:any;
-
-    var one = window.One;
-    one.init({
-        siteKey: <site-key>,
-        touchpointURI: <touchpoint-uri>,
-        apiKey: <api-key>,
-        sharedSecret:  <shared-secret>,
-        userId:  <user-id>,
-        adminMode:  <admin-mode>,
-        hostName: <host-name>
-    };
-```
+To configure the ONE Cordova Plugin, declare a `window` variable and configure ONE when platform is ready. 
 * See example of usage [here](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic5-angular-example/src/app/app.component.ts#L28)
+* To find your ONE credentials, see [Find the Information required when Integrating ONE with your Mobile App](https://na5.thunderhead.com/one/help/conversations/how-do-i/mobile/one_integrate_mobile_find_integration_info/)
+
+    ```javascript
+    import { Component } from '@angular/core';
+    import { Platform } from '@ionic/angular';
+
+    declare var window;
+    ...
+
+    export class AppComponent {
+        constructor(private platform: Platform) {
+            this.initializeOne();
+        }
+
+        private initializeOne() {
+        // The platform is ready and native functionality can be called.
+        // https://ionicframework.com/docs/angular/platform#ready-promise-string-
+        this.platform.ready().then(() => {
+            var one = window.One;
+            if (one) {
+                one.init({
+                    siteKey: "ONE-XXXXXXXXXX-1022",
+                    apiKey: "f713d44a-8af0-4e79-ba7e-xxxxxxxxxxxxxxxx",
+                    sharedSecret: "bb8bacb2-ffc2-4c52-aaf4-xxxxxxxxxxxxxxxx",
+                    userId: "api@yourCompanyName",
+                    hostName: "https://xx.thunderhead.com",
+                    touchpointURI: "ionic://optimization-example",
+                    adminMode: false
+                });
+            }
+        });
+        }
+    }
+	```
 
 ## Additional features
 
@@ -77,30 +96,30 @@ To configure the ONE Cordova Plugin, call the following method:
 #### Opt an end-user out of tracking
 To opt an end-user out of tracking, when the end-user does not give permission to be tracked in the client app, call the following public method:
 ```javascript
-One.optOut(true);
+window.One.optOut(true);
 ```
 
 #### Opt an end-uer out of keychain Tid storage on iOS 
 On iOS, to opt out an end-user of all keychain Tid storage, call the opt method as shown below:
 ```javascript 
-One.optOut(true, ['keychainTidStorage']);
+window.One.optOut(true, ['keychainTidStorage']);
 ```
 
 ### Send an Interaction 
 To send an Interaction request with properties, call the following method:
 ```javascript
-One.sendInteraction("/interactionPath", null);
+window.One.sendInteraction("/interactionPath", null);
 ```
 To send an Interaction request without properties, call the following method:
 ```javascript
-One.sendInteraction("/interactionPath", {key: "value"});
+window.One.sendInteraction("/interactionPath", {key: "value"});
 ```
 * See example of usage [here](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic5-angular-example/src/app/app.component.ts#L37)
 
 ### Send an Interaction with a Callback
 To send an Interaction request with a callback and properties, call the following public method:
 ```javascript
-One.sendInteraction("/interactionPath", {key: "value"}, 
+window.One.sendInteraction("/interactionPath", {key: "value"}, 
     function(response) {
         console.log(response)
     }, 
@@ -111,7 +130,7 @@ One.sendInteraction("/interactionPath", {key: "value"},
 ```
 To send an Interaction request with a callback and without properties, call the following pubilc method:
 ```javascript
-One.sendInteraction("/interactionPath", null, 
+window.One.sendInteraction("/interactionPath", null, 
     function(response) {
         console.log(response)
     }, 
@@ -125,28 +144,28 @@ One.sendInteraction("/interactionPath", null,
 ### Send properties to an Interaction
 To send properties to a specific Interaction, call the following public method, passing in your JavaScript object containing your properties:
 ```javascript
-One.sendProperties("/interactionPath", {key:"value"});
+window.One.sendProperties("/interactionPath", {key:"value"});
 ```
 * See example of usage [here](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic5-angular-example/src/app/app.component.ts#L45)
 
 ### Send properties to a Base Touchpoint
 To send properties to a Base Touchpoint, call the following public method and pass in your JavaScript object containing your properties:
 ```javascript
-One.sendBaseTouchpointProperties({key:"value"});
+window.One.sendBaseTouchpointProperties({key:"value"});
 ```
 * See example of usage [here](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic5-angular-example/src/app/app.component.ts#L53)
 
 ### Ability to whitelist identity transfer links
 To whitelist links to which the SDK appends a one-tid, call the following public method:
 ```javascript
-One.whitelistIdentityTransferLinks(["*.google.*","*.wikipedia.org"]);
+window.One.whitelistIdentityTransferLinks(["*.google.*","*.wikipedia.org"]);
 ```
 **Note**: If a link is whitelisted, a one-tid will be appended to this link only.
 
 ### Ability to blacklist identity transfer links
 To blacklist links to which the SDK appends a one-tid, call the following public method:
 ```javascript
-One.blacklistIdentityTransferLinks(["*.bbc.com"]);
+window.One.blacklistIdentityTransferLinks(["*.bbc.com"]);
 ```
 **Note**: If a link is blacklisted, a one-tid will be appended to all other links but the blacklisted link.
 
@@ -159,7 +178,7 @@ var onDisablingAutomaticIdentityTransferSuccess = function() {
 var onDisablingAutomaticIdentityTransferFailure = function(error) {
     console.log(error);
 };
-One.disableIdentityTransfer(true, onDisablingAutomaticIdentityTransferSuccess, onDisablingAutomaticIdentityTransferFailure);
+window.One.disableIdentityTransfer(true, onDisablingAutomaticIdentityTransferSuccess, onDisablingAutomaticIdentityTransferFailure);
 ```
 
 ### Get a URL with one-tid
@@ -172,7 +191,7 @@ var onGetURLWithOneTidSuccess = function(urlWithOneTid) {
 var onGetURLWithOneTidFailure = function(error) {
     console.log(error);
 };
-One.getURLWithOneTid(url,onGetURLWithOneTidSuccess, onGetURLWithOneTidFailure);
+window.One.getURLWithOneTid(url,onGetURLWithOneTidSuccess, onGetURLWithOneTidFailure);
 ```
 
 ### Send properties for an incoming URL
@@ -185,7 +204,7 @@ var onHandleURLSuccess = function() {
 var onHandleURLError = function(error) {
     console.log(error);
 };
-One.handleURL(incomingURL, onHandleURLSuccess, onHandleURLError);
+window.One.handleURL(incomingURL, onHandleURLSuccess, onHandleURLError);
 ```
 
 ### Disable automatic outbound link tracking 
@@ -197,7 +216,7 @@ var onDisablingAutomaticLinkTrackingSuccess = function() {
 var onDisablingAutomaticLinkTrackingFailure = function(error) {
     console.log(error);
 };
-One.disableAutomaticOutboundLinkTracking(true, onDisablingAutomaticLinkTrackingSuccess, onDisablingAutomaticLinkTrackingFailure);
+window.One.disableAutomaticOutboundLinkTracking(true, onDisablingAutomaticLinkTrackingSuccess, onDisablingAutomaticLinkTrackingFailure);
 ```
 
 #### Programmatically trigger an outbound link tracking Interaction call
@@ -210,7 +229,7 @@ var onSendInteractionForLinkSuccess = function() {
 var onSendInteractionForLinkFailure = function(error) {
     console.log(error);
 };
-One.sendInteractionForOutboundLink(url, onSendInteractionForLinkSuccess, onSendInteractionForLinkFailure);
+window.One.sendInteractionForOutboundLink(url, onSendInteractionForLinkSuccess, onSendInteractionForLinkFailure);
 ```
 
 ### Get Tid
@@ -219,7 +238,7 @@ To get the tid for the current app, call the following public method:
 var onTidSuccess = function(tid) {
     // Do something with the tid
 };
-One.getTid(onTidSuccess);
+window.One.getTid(onTidSuccess);
 ```
 
 ### Clear the User Profile
@@ -231,7 +250,7 @@ var onClearUserProfileSuccess = function() {
 var onClearUserProfileFailure = function() {
     console.log("The SDK failed to clear the tid");
 };
-One.clearUserProfile(onClearUserProfileSuccess,onClearUserProfileFailure);
+window.One.clearUserProfile(onClearUserProfileSuccess,onClearUserProfileFailure);
 ```
 
 ## Plugin removal
