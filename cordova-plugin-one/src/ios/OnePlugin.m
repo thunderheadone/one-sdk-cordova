@@ -71,7 +71,6 @@
                 CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
                 [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
             } else {
-                [One processResponse:response];
                 CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:response];
                 [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
             }
@@ -82,7 +81,6 @@
                 CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
                 [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
             } else {
-                [One processResponse:response];
                 CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:response];
                 [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
             }
