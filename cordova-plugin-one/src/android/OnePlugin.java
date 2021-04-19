@@ -239,8 +239,6 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
         .disableCodelessInteractionTracking(true)
         // disables WebView URL Interaction Tracking
         .disableWebViewInteractionTracking(true)
-        // disables Outbound Link Tracking
-        .disableOutboundLinkTracking(true)
         .build();
     One.setCodelessInteractionTrackingConfiguration(codelessInteractionTrackingConfiguration);
 

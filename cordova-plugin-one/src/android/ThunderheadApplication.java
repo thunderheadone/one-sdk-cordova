@@ -14,8 +14,6 @@ public class ThunderheadApplication extends Application {
           .disableCodelessInteractionTracking(true)
           // disables WebView URL Interaction Tracking
           .disableWebViewInteractionTracking(true)
-          // disables Outbound Link Tracking
-          .disableOutboundLinkTracking(true)
           .build();
       One.setCodelessInteractionTrackingConfiguration(codelessInteractionTrackingConfiguration);
     }
