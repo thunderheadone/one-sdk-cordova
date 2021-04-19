@@ -14,6 +14,14 @@ module.exports = {
         ]);
     },
 
+	optOut : function(optOut, successCallback, errorCallback) {
+	    exec(successCallback, errorCallback, "One", "optOut", [optOut]);
+	},
+
+	optOut : function(optOut, options, successCallback, errorCallback) {
+	    exec(successCallback, errorCallback, "One", "optOut", [optOut, options]);
+	},
+
 	sendInteraction : function(interactionPath, properties, successCallback, errorCallback) {
 	    exec(successCallback, errorCallback, "One", "sendInteraction", [interactionPath, properties]);
 	},
@@ -34,12 +42,14 @@ module.exports = {
 	    exec(successCallback, errorCallback, "One", "getTid", []);
 	},
 
-	optOut : function(optOut, successCallback, errorCallback) {
-	    exec(successCallback, errorCallback, "One", "optOut", [optOut]);
-	},
-
-	optOut : function(optOut, options, successCallback, errorCallback) {
-	    exec(successCallback, errorCallback, "One", "optOut", [optOut, options]);
+	/**
+   	* Sets the Log Level. 
+	*
+	* @param {LogLevel} logLevel - Specifies Log Level to use.  LogLevel.NONE or LogLevel.ALL
+   */
+	setLogLevel : function(logLevel, successCallback, errorCallback) {
+		argscheck.checkArgs('nFF', 'UAirship.setPresentationOptions', arguments)
+	    exec(successCallback, errorCallback, "One", "setLogLevel", [logLevel]);
 	},
 
 	clearUserProfile : function(successCallback, errorCallback) {
@@ -72,6 +82,15 @@ module.exports = {
 
 	blacklistIdentityTransferLinks : function(links, successCallback, errorCallback) {
 		exec(successCallback, errorCallback, "One", "blacklistIdentityTransferLinks", links);
-	}
+	},
 
+	/**
+   	* Enum for configuring Logging Options.
+   	* @readonly
+   	* @enum {number}
+   	*/
+ 	LogLevel: {
+    	NONE: 0,
+    	ALL: 1
+  	}
 };
