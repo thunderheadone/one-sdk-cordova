@@ -3,7 +3,7 @@ package com.thunderhead;
 import android.app.Application;
 import com.thunderhead.android.api.codeless.OneCodelessInteractionTrackingConfiguration;
 
-public class MyApplication extends Application {
+public class ThunderheadApplication extends Application {
     @Override
     public void onCreate() {
       super.onCreate();

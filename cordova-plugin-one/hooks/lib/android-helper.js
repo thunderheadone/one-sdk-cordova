@@ -40,8 +40,8 @@ module.exports = {
     },
 
     addApplicationToManifest: function (context) {
-      logger.log("One plugin: Adding android:name=\"com.thunderhead.MyApplication\" to AndroidManifest.xml...");
-      var APP_CLASS = 'com.thunderhead.MyApplication';
+      logger.log("One plugin: Adding android:name=\"com.thunderhead.ThunderheadApplication\" to AndroidManifest.xml...");
+      var APP_CLASS = 'com.thunderhead.ThunderheadApplication';
       var platformRoot = path.join(context.opts.projectRoot, 'platforms/android');
       var manifestFile = path.join(platformRoot, 'app/src/main/AndroidManifest.xml');
 
