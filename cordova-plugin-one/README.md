@@ -241,6 +241,20 @@ var onTidSuccess = function(tid) {
 window.One.getTid(onTidSuccess);
 ```
 
+### Access debug information
+
+To configure logging, call the following methods:
+
+1. `LogLevel.NONE` - if set, no messages will be displayed in the Xcode/Android Studio console.
+    ```javascript
+    window.one.setLogLevel(window.one.LogLevel.NONE);
+    ```
+
+2. `LogLevel.ALL` - if set, all log messages will be displayed in the Xcode/Android Studio console.
+    ```javascript
+    window.one.setLogLevel(window.one.LogLevel.ALL);
+    ```
+    
 ### Clear the User Profile
 To clear the current app tid, call the following public method:
 ```javascript
