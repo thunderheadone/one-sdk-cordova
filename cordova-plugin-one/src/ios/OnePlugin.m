@@ -129,6 +129,22 @@
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
+- (void)setLogLevel:(CDVInvokedUrlCommand*)command
+{
+    int logLevel = [[command.arguments objectAtIndex:0] intValue];
+    
+    switch (logLevel) {
+        case 0:
+            [One setLogLevel:kOneLogLevelNone];
+            break;
+        case 1:
+            [One setLogLevel:kOneLogLevelAll];
+            break;
+        default:
+            break;
+    }
+}
+
 - (void)clearUserProfile:(CDVInvokedUrlCommand*)command
 {
     [One clearUserProfile];
