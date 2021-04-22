@@ -28,6 +28,34 @@
     [One disableAutomaticInteractionDetection:YES];
 }
 
+- (void)optOut:(CDVInvokedUrlCommand*)command
+{
+    BOOL optOut = [[command.arguments objectAtIndex:0] boolValue];
+    NSArray *options = [command.arguments objectAtIndex:1];
+
+    if (![options isKindOfClass:[NSNull class]] && [options isKindOfClass:[NSArray class]]) {
+        if (options.count) {
+            for (NSString *option in options) {
+                NSString *lowercasedOpt = [option lowercaseString];
+                if ([lowercasedOpt isEqualToString:[@"keychainTidStorage" lowercaseString]]) {
+                    [One opt:optOut ? Out : In forOptions:KeychainTidStorage];
+                } else if ([lowercasedOpt isEqualToString:[@"pasteboardTidStorage" lowercaseString]]) {
+                    [One opt:optOut ? Out : In forOptions:PasteboardTidStorage];
+                } else if ([lowercasedOpt isEqualToString:[@"cityCountryDetection" lowercaseString]]) {
+                    [One opt:optOut ? Out : In forOptions:CityCountryDetection];
+                } else if ([lowercasedOpt isEqualToString:[@"allTracking" lowercaseString]]) {
+                    [One opt:optOut ? Out : In forOptions:AllTracking];
+                }
+            }
+        } else {
+            [One opt:optOut ? Out : In forOptions:AllTracking];
+        }
+    
+    } else {
+        [One opt:optOut ? Out : In forOptions:AllTracking];
+    }
+}
+
 - (void)sendInteraction:(CDVInvokedUrlCommand*)command
 {
     NSString *interactionPath = [command.arguments objectAtIndex:0];
@@ -58,6 +86,18 @@
             }
         }];
     }
+}
+
+- (void)sendResponseCode:(CDVInvokedUrlCommand*)command
+{
+    NSString *responseCode = [command.arguments objectAtIndex:0];
+    NSString *interactionPath = [command.arguments objectAtIndex:1];
+    
+    if (!responseCode.length) {
+        return;
+    }
+    
+    [One sendResponseCode:responseCode forInteractionPath:interactionPath];
 }
 
 - (void)sendProperties:(CDVInvokedUrlCommand*)command
@@ -191,60 +231,6 @@
     NSURL *url = [NSURL URLWithString:urlString];
     
     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[One getURLWithOneTid:url].absoluteString];
-    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
-}
-
-- (void)enablePushNotifications:(CDVInvokedUrlCommand *)command
-{
-    NSNumber *enablePushNotifications = [command.arguments objectAtIndex:0];
-    CDVPluginResult *result;
-    
-    if (![enablePushNotifications isKindOfClass:[NSNumber class]]) {
-        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"The ONE SDK can't get a boolean from the user input to enable/disable push notifications"];
-        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
-        return;
-    }
-    
-    [One enablePushNotifications:[enablePushNotifications boolValue]];
-    
-    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
-}
-
-- (void)getPushToken:(CDVInvokedUrlCommand*)command
-{
-    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[One getPushToken]];
-    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
-}
-
-- (void)sendPushToken:(CDVInvokedUrlCommand*)command
-{
-    CDVPluginResult *result;
-    
-    id pushToken = [command.arguments objectAtIndex:0];
-    if (!pushToken || (![pushToken isKindOfClass:[NSData class]] && ![pushToken isKindOfClass:[NSString class]])) {
-        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"The SDK cannot send a request for a provided push token: it is either a nil or not a NSData or not a NSString object"];
-        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
-        return;
-    }
-
-    if ([pushToken isKindOfClass:[NSString class]]) {
-        const char *ptr = [pushToken cStringUsingEncoding:NSASCIIStringEncoding];
-        NSUInteger len = [pushToken length]/2;
-        NSMutableData *dataPushToken = [NSMutableData dataWithCapacity:len];
-        while(len--) {
-            char num[5] = (char[]){ '0', 'x', 0, 0, 0 };
-            num[2] = *ptr++;
-            num[3] = *ptr++;
-            uint8_t n = (uint8_t)strtol(num, NULL, 0);
-            [dataPushToken appendBytes:&n length:1];
-        }
-        [One sendPushToken:dataPushToken];
-    } else {
-        [One sendPushToken:pushToken];
-    }
-
-    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 

@@ -3,42 +3,123 @@
 
 The ONE SDK Cordova Plugin for iOS and Android.
 
+## Table of Contents
+* [Requirements](#requirements)
+    * [iOS version requirements](#ios-version-requirements)
+    * [Android version requirements](#android-version-requirements)
+* [Installation](#installation)
+* [Configure the Thunderhead SDK](#configure-the-thunderhead-sdk)
+* [Additional features](#additional-features)
+    * [Opt out](#opt-out)
+        * [Opt an end-user out of tracking](#opt-an-end-user-out-of-tracking)
+        * [Opt an end-uer out of keychain Tid storage on iOS](#opt-an-end-uer-out-of-keychain-tid-storage-on-ios)
+    * [Send an Interaction](#send-an-interaction)
+    * [Send an Interaction with a Callback](#send-an-interaction-with-a-callback)
+    * [Send properties to an Interaction](#send-properties-to-an-interaction)
+    * [Send properties to a Base Touchpoint](#send-properties-to-a-base-touchpoint)
+    * [Ability to whitelist identity transfer links](#ability-to-whitelist-identity-transfer-links)
+    * [Ability to blacklist identity transfer links](#ability-to-blacklist-identity-transfer-links)
+    * [Disable automatic identity transfer](#disable-automatic-identity-transfer)
+    * [Get a URL with one-tid](#get-a-url-with-one-tid)
+    * [Send properties for an incoming URL](#send-properties-for-an-incoming-url)
+    * [Disable automatic outbound link tracking](#disable-automatic-outbound-link-tracking)
+        * [Programmatically trigger an outbound link tracking Interaction call](#programmatically-trigger-an-outbound-link-tracking-interaction-call)
+    * [Get Tid](#get-tid)
+    * [Clear the User Profile](#clear-the-user-profile)
+* [Plugin removal](#plugin-removal)
+
+## Requirements
+The native Thunderhead SDKs require the following mininum versions:
+
++ cordova >= 9.0.0
++ cordova-ios >= 6.1.0
++ cordova-android >= 9.0.0
++ cococapods >= 1.9
+
+### iOS version requirements
++ iOS minimum version (deployment target): iOS 9.0
++ iOS base SDK version: iOS 14.3
+
+### Android version requirements
++ [Android Gradle Plugin](https://developer.android.com/studio/releases/gradle-plugin) 3.6.x
++ Android 5.0+ (API 21) and above
++ [Gradle](https://gradle.org/releases/) 5.6.4
+
 ## Installation
 To install the ONE Cordova Plugin, navigate to your app’s folder and run the following command:
 ```sh
 $ cordova plugin add cordova-plugin-one
 ```
-## Usage
-### Initialization
-To initialize the ONE Cordova Plugin, call the following method:
-```javascript
-    One.init({
-        siteKey: <site-key>,
-        touchpointURI: <touchpoint-uri>,
-        apiKey: <api-key>,
-        sharedSecret:  <shared-secret>,
-        userId:  <user-id>,
-        adminMode:  <admin-mode>,
-        hostName: <host-name>
-    };
-```
+
+## Configure the Thunderhead SDK
+To configure the ONE Cordova Plugin, declare a `window` variable and configure ONE when platform is ready. 
 * See example of usage [here](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic5-angular-example/src/app/app.component.ts#L28)
+* To find your ONE credentials, see [Find the Information required when Integrating ONE with your Mobile App](https://na5.thunderhead.com/one/help/conversations/how-do-i/mobile/one_integrate_mobile_find_integration_info/)
+
+    ```javascript
+    import { Component } from '@angular/core';
+    import { Platform } from '@ionic/angular';
+
+    declare var window;
+    ...
+
+    export class AppComponent {
+        constructor(private platform: Platform) {
+            this.initializeOne();
+        }
+
+        private initializeOne() {
+        // The platform is ready and native functionality can be called.
+        // https://ionicframework.com/docs/angular/platform#ready-promise-string-
+        this.platform.ready().then(() => {
+            var one = window.One;
+            if (one) {
+                one.init({
+                    siteKey: "ONE-XXXXXXXXXX-1022",
+                    apiKey: "f713d44a-8af0-4e79-ba7e-xxxxxxxxxxxxxxxx",
+                    sharedSecret: "bb8bacb2-ffc2-4c52-aaf4-xxxxxxxxxxxxxxxx",
+                    userId: "api@yourCompanyName",
+                    hostName: "https://xx.thunderhead.com",
+                    touchpointURI: "ionic://optimization-example",
+                    adminMode: false
+                });
+            }
+        });
+        }
+    }
+	```
+
+## Additional features
+
+### Opt out
+
+#### Opt an end-user out of tracking
+To opt an end-user out of tracking, when the end-user does not give permission to be tracked in the client app, call the following public method:
+```javascript
+window.One.optOut(true);
+```
+
+#### Opt an end-uer out of keychain Tid storage on iOS 
+On iOS, to opt out an end-user of all keychain Tid storage, call the opt method as shown below:
+```javascript 
+window.One.optOut(true, ['keychainTidStorage']);
+```
 
 ### Send an Interaction 
 To send an Interaction request with properties, call the following method:
 ```javascript
-One.sendInteraction("/interactionPath", null);
+window.One.sendInteraction("/interactionPath", null);
 ```
 To send an Interaction request without properties, call the following method:
 ```javascript
-One.sendInteraction("/interactionPath", {key: "value"});
+window.One.sendInteraction("/interactionPath", {key: "value"});
 ```
 * See example of usage [here](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic5-angular-example/src/app/app.component.ts#L37)
 
 ### Send an Interaction with a Callback
 To send an Interaction request with a callback and properties, call the following public method:
 ```javascript
-One.sendInteraction("/interactionPath", {key: "value"}, 
+window.One.sendInteraction("/interactionPath", {key: "value"}, 
     function(response) {
         console.log(response)
     }, 
@@ -49,7 +130,7 @@ One.sendInteraction("/interactionPath", {key: "value"},
 ```
 To send an Interaction request with a callback and without properties, call the following pubilc method:
 ```javascript
-One.sendInteraction("/interactionPath", null, 
+window.One.sendInteraction("/interactionPath", null, 
     function(response) {
         console.log(response)
     }, 
@@ -63,50 +144,32 @@ One.sendInteraction("/interactionPath", null,
 ### Send properties to an Interaction
 To send properties to a specific Interaction, call the following public method, passing in your JavaScript object containing your properties:
 ```javascript
-One.sendProperties("/interactionPath", {key:"value"});
+window.One.sendProperties("/interactionPath", {key:"value"});
 ```
 * See example of usage [here](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic5-angular-example/src/app/app.component.ts#L45)
 
 ### Send properties to a Base Touchpoint
 To send properties to a Base Touchpoint, call the following public method and pass in your JavaScript object containing your properties:
 ```javascript
-One.sendBaseTouchpointProperties({key:"value"});
+window.One.sendBaseTouchpointProperties({key:"value"});
 ```
 * See example of usage [here](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic5-angular-example/src/app/app.component.ts#L53)
 
-### Get tid
-To get the tid for the current app, call the following public method:
-```javascript
-var onTidSuccess = function(tid) {
-    // Do something with the tid
-};
-One.getTid(onTidSuccess);
-```
-### Clear User Profile
-To clear the current app tid, call the following public method:
-```javascript
-var onClearUserProfileSuccess = function() {
-    console.log("The SDK cleared the tid");
-}
-var onClearUserProfileFailure = function() {
-    console.log("The SDK failed to clear the tid");
-};
-One.clearUserProfile(onClearUserProfileSuccess,onClearUserProfileFailure);
-```
-### Identity transfer
-####	Ability to whitelist identity transfer links
+### Ability to whitelist identity transfer links
 To whitelist links to which the SDK appends a one-tid, call the following public method:
 ```javascript
-One.whitelistIdentityTransferLinks(["*.google.*","*.wikipedia.org"]);
+window.One.whitelistIdentityTransferLinks(["*.google.*","*.wikipedia.org"]);
 ```
 **Note**: If a link is whitelisted, a one-tid will be appended to this link only.
-####	Ability to blacklist identity transfer links
+
+### Ability to blacklist identity transfer links
 To blacklist links to which the SDK appends a one-tid, call the following public method:
 ```javascript
-One.blacklistIdentityTransferLinks(["*.bbc.com"]);
+window.One.blacklistIdentityTransferLinks(["*.bbc.com"]);
 ```
 **Note**: If a link is blacklisted, a one-tid will be appended to all other links but the blacklisted link.
-#### Disable automatic identity transfer
+
+### Disable automatic identity transfer
 To disable automatic identity transfer, call the following public method:
 ```javascript
 var onDisablingAutomaticIdentityTransferSuccess = function() {
@@ -115,9 +178,10 @@ var onDisablingAutomaticIdentityTransferSuccess = function() {
 var onDisablingAutomaticIdentityTransferFailure = function(error) {
     console.log(error);
 };
-One.disableIdentityTransfer(true, onDisablingAutomaticIdentityTransferSuccess, onDisablingAutomaticIdentityTransferFailure);
+window.One.disableIdentityTransfer(true, onDisablingAutomaticIdentityTransferSuccess, onDisablingAutomaticIdentityTransferFailure);
 ```
-#### Get a URL with one-tid
+
+### Get a URL with one-tid
 To get a URL with one-tid, call the following public method:
 ```javascript
 var url = "https://en.m.wikipedia.org/wiki/Safari?key=value&key2=value2";
@@ -127,9 +191,10 @@ var onGetURLWithOneTidSuccess = function(urlWithOneTid) {
 var onGetURLWithOneTidFailure = function(error) {
     console.log(error);
 };
-One.getURLWithOneTid(url,onGetURLWithOneTidSuccess, onGetURLWithOneTidFailure);
+window.One.getURLWithOneTid(url,onGetURLWithOneTidSuccess, onGetURLWithOneTidFailure);
 ```
-#### Send properties for an incoming URL
+
+### Send properties for an incoming URL
 To send properties for an incoming URL, call the following public method:
 ```javascript
 var incomingURL = "https://en.m.wikipedia.org/wiki/Safari?key=value&key2=value2";
@@ -139,10 +204,10 @@ var onHandleURLSuccess = function() {
 var onHandleURLError = function(error) {
     console.log(error);
 };
-One.handleURL(incomingURL, onHandleURLSuccess, onHandleURLError);
+window.One.handleURL(incomingURL, onHandleURLSuccess, onHandleURLError);
 ```
-### Outbound link tracking
-#### Disable automatic outbound link tracking 
+
+### Disable automatic outbound link tracking 
 To disable automatic outbound link tracking, call the following public method:
 ```javascript
 var onDisablingAutomaticLinkTrackingSuccess = function() {
@@ -151,10 +216,11 @@ var onDisablingAutomaticLinkTrackingSuccess = function() {
 var onDisablingAutomaticLinkTrackingFailure = function(error) {
     console.log(error);
 };
-One.disableAutomaticOutboundLinkTracking(true, onDisablingAutomaticLinkTrackingSuccess, onDisablingAutomaticLinkTrackingFailure);
+window.One.disableAutomaticOutboundLinkTracking(true, onDisablingAutomaticLinkTrackingSuccess, onDisablingAutomaticLinkTrackingFailure);
 ```
-#### Send 'one-click' interaction for a URL
-To send "one-click" Interaction request for a URL, call the following public method:
+
+#### Programmatically trigger an outbound link tracking Interaction call
+If you have disabled automatic outbound link tracking, you can still track a URL, by calling:
 ```javascript
 var url = "https://en.m.wikipedia.org/wiki/Safari?key=value&key2=value2";
 var onSendInteractionForLinkSuccess = function() {
@@ -163,138 +229,30 @@ var onSendInteractionForLinkSuccess = function() {
 var onSendInteractionForLinkFailure = function(error) {
     console.log(error);
 };
-One.sendInteractionForOutboundLink(url, onSendInteractionForLinkSuccess, onSendInteractionForLinkFailure);
+window.One.sendInteractionForOutboundLink(url, onSendInteractionForLinkSuccess, onSendInteractionForLinkFailure);
 ```
-###	Enable push notifications
-#### iOS integration
-To receive push notifications from ONE, take the following steps
 
-1.	Open your app using Xcode.
-2.	Enable **Push Notifications** in **Capabilities** pane.
-3.	Enable **Background Modes** in **Capabilities** pane.
-4.	Select **Remote Notifications** under **Background Modes** section.
-5.	In your Cordova codebase call the method *enablePushNotifications* by passing **true**, as shown below:
+### Get Tid
+To get the tid for the current app, call the following public method:
 ```javascript
-var onSuccess = function() {
-    // Do something
+var onTidSuccess = function(tid) {
+    // Do something with the tid
 };
-var onError = function(error) {
-    console.log(error);
-};
-One.enablePushNotifications(true, onSuccess, onError);
-```
-#### Android integration 
-To receive push notifications from Thunderhead ONE or Salesforce Interaction Studio, Firebase Cloud Messaging (FCM) must be configured by following the FCM setup instructions.
-At minimum the app must be configured in Firebase and the `google-services.json` needs to be in the root of the app project.
-
-#### Minimum Gradle configuration
-To use the codeless push notifications functionality without using FCM directly, you need to at least have the `google-services` plugin applied to your app build.gradle:
-
-1. Add the Google Services Plugin to your classpath in the top-level build.gradle file, located in the root project directory, as shown below:
-    ```gradle
-    buildscript {
-        repositories {
-            google()
-            jcenter()
-            mavenCentral()
-        }
-        dependencies {
-            classpath 'com.android.tools.build:gradle:3.4.2'
-            // for cloud messaging support
-            classpath 'com.google.gms:google-services:4.2.0'
-        }
-    }
-    ```
-2.  Apply the Google Messaging Service plugin to the app-level build.gradle file, as shown below:
-
-    ```gradle
-    // place this at the bottom of your app build.gradle
-    apply plugin: 'com.google.gms.google-services'
-    ```
-
-    - The `Warning: The app gradle file must have a dependency on com.google.firebase:firebase-core for Firebase services to work as intended.`
-    can safely be ignored as this is not required for Push Notification Support.
-
-#### Enable codeless push notification support programmatically
-- For Firebase Cloud Messaging simply enable push notifications as shown below:
-    ```java
-    One one = One.getInstance(getApplicationContext());
-    one.enablePushNotifications(true);
-    ```
-*Note:*
-- When the Thunderhead SDK is the only push message provider in your application and you enable codeless push notification support,
-the SDK will automatically get the push token and handle receiving of push notifications on behalf of your app.
-
-##### Configure push notifications with multiple push message SDKs
-When the Thunderhead SDK is integrated into an App that has multiple push message providers for Firebase, extra configuration is required.
-The Thunderhead SDK message APIs must be called from the service that receives the FCM token and FCM Message.  
-
-```java
-// Call when a new FCM token is retrieved:
-One.getInstance(context).processMessagingToken(newToken);
-
-// Call when a new message is received from Firebase:
-One.getInstance(context).processMessage(message);
+window.One.getTid(onTidSuccess);
 ```
 
-An example of a Firebase Messaging Service that calls the Thunderhead SDK messaging APIs:
-```java
-public final class FirebaseService extends FirebaseMessagingService {
-    private static final String TAG = "FirebaseService";
-
-    @Override
-    public void onMessageReceived(final RemoteMessage remoteMessage) {
-        super.onMessageReceived(remoteMessage);
-        try {
-            One.getInstance(getApplicationContext()).processMessage(remoteMessage);
-            // Call other Push Message SDKS.
-        } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
-        }
-    }
-
-    @Override
-    public void onNewToken(final String newToken) {
-        super.onNewToken(newToken);
-        try {
-            One.getInstance(getApplicationContext()).processMessagingToken(newToken);
-            // Call other Push Message SDKS.
-        } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
-        }
-    }
+### Clear the User Profile
+To clear the current app tid, call the following public method:
+```javascript
+var onClearUserProfileSuccess = function() {
+    console.log("The SDK cleared the tid");
 }
+var onClearUserProfileFailure = function() {
+    console.log("The SDK failed to clear the tid");
+};
+window.One.clearUserProfile(onClearUserProfileSuccess,onClearUserProfileFailure);
 ```
 
-Do not forget to register the customer service (if required) that calls the Thunderhead SDK in the manifest:
-
-```xml
-
-<!-- The priority should be set to a high value in order to ensure this service receives the intent vs the other push provider SDKs -->
- <service android:name="com.example.FirebaseService">
-    <intent-filter android:priority="100">
-        <action android:name="com.google.firebase.MESSAGING_EVENT" />
-    </intent-filter>
-</service>
-```
-###	Send a push token programmatically 
-To send a push token programmatically to ONE, call the following public method:
-```javascript
-One.sendPushToken(token, 
-    function() {
-        console.log("The push token" + token +  " is sent.");
-    }, function(error) {
-        console.log("An error occurred when sending the push token: " + error);
-    }
-);
-```
-###	Get a push token programmatically  
-To retrieve a push token stored in the iOS or Android SDK, call the following public method:
-```javascript
-One.getPushToken(function (token) {
-    console.log(token);
-});
-```
 ## Plugin removal
 To remove the ONE Cordova Plugin, call the following command in Terminal:
 ``` sh

@@ -22,12 +22,24 @@ module.exports = {
 	    exec(successCallback, errorCallback, "One", "sendProperties", [interactionPath, properties]);
 	},
 
+	sendResponseCode : function(responseCode, interactionPath, successCallback, errorCallback) {
+	    exec(successCallback, errorCallback, "One", "sendResponseCode", [responseCode, interactionPath]);
+	},
+
 	sendBaseTouchpointProperties : function(properties, successCallback, errorCallback) {
 	    exec(successCallback, errorCallback, "One", "sendBaseTouchpointProperties", [properties]);
 	},
 
 	getTid : function(successCallback, errorCallback) {
 	    exec(successCallback, errorCallback, "One", "getTid", []);
+	},
+
+	optOut : function(optOut, successCallback, errorCallback) {
+	    exec(successCallback, errorCallback, "One", "optOut", [optOut]);
+	},
+
+	optOut : function(optOut, options, successCallback, errorCallback) {
+	    exec(successCallback, errorCallback, "One", "optOut", [optOut, options]);
 	},
 
 	clearUserProfile : function(successCallback, errorCallback) {
@@ -52,18 +64,6 @@ module.exports = {
 
 	handleURL : function(url, successCallback, errorCallback) {
 		exec(successCallback, errorCallback, "One", "handleURL", [url]);
-	},
-
-	enablePushNotifications : function(enable, successCallback, errorCallback) {
-		exec(successCallback, errorCallback, "One", "enablePushNotifications", [enable]);
-	},
-
-	getPushToken : function(successCallback, errorCallback) {
-		exec(successCallback, errorCallback, "One", "getPushToken", []);
-	},
-
-	sendPushToken : function(pushToken, successCallback, errorCallback) {
-		exec(successCallback, errorCallback, "One", "sendPushToken", [pushToken]);
 	},
 
 	whitelistIdentityTransferLinks : function(links, successCallback, errorCallback) {

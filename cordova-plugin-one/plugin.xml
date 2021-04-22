@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-one" version="1.4.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+<plugin id="cordova-plugin-one" version="2.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
 	<name>cordova-plugin-one</name>
 	<description>One Cordova Plugin for the ONE SDK for iOS and Android</description>
-	<license>Copyright © 2020 Thunderhead. All rights reserved.</license>
+	<license>Copyright © 2021 Thunderhead. All rights reserved.</license>
 	
 	<js-module 
 		name="One" 
@@ -13,7 +13,7 @@
     <!--Plugin hooks. One plugin needs to add additional configuration to the target app build.gradle-->
     <hook type="after_plugin_install" src="hooks/after_plugin_install.js" />
     <hook type="before_plugin_uninstall" src="hooks/before_plugin_uninstall.js" />
-    
+
     <!--We need to update gradle version variable before each gradle task execution to prevent build errors-->
     <hook type="before_build" src="hooks/bump_gradle_version.js" />
     <hook type="before_clean" src="hooks/bump_gradle_version.js" />
@@ -23,7 +23,7 @@
     <hook type="before_prepare" src="hooks/bump_gradle_version.js" />
     <hook type="before_run" src="hooks/bump_gradle_version.js" />
     <hook type="before_serve" src="hooks/bump_gradle_version.js" />
-    
+
     <!-- iOS -->
     <platform name="ios">
         <config-file parent="/*" target="config.xml">
@@ -34,18 +34,38 @@
         </config-file>
         <header-file src="src/ios/OnePlugin.h" />
         <source-file src="src/ios/OnePlugin.m" />
+        <config-file target="*-Info.plist" parent="Thunderhead Config">
+            <dict>
+                <key>Swizzling Options</key>
+            <dict>
+                <key>DisableWKWebViewTracking</key>
+                <true/>
+            </dict>
+        </dict>
+        </config-file>
         <podspec>
             <config>
                 <source url="https://github.com/CocoaPods/Specs.git"/>
             </config>
             <pods use-frameworks="true">
-                <pod name="Thunderhead" spec="~> 5.2.1" />
+                <pod name="Thunderhead" spec="~> 6.3.4" />
             </pods>
         </podspec>
     </platform>
     
     <!-- Android -->
     <platform name="android">
+        <hook type="before_build" src="hooks/android_app_name.js" />
+        <hook type="before_clean" src="hooks/android_app_name.js" />
+        <hook type="before_compile" src="hooks/android_app_name.js" />
+        <hook type="before_docs" src="hooks/android_app_name.js" />
+        <hook type="before_emulate" src="hooks/android_app_name.js" />
+        <hook type="before_prepare" src="hooks/android_app_name.js" />
+        <hook type="before_run" src="hooks/android_app_name.js" />
+        <hook type="before_serve" src="hooks/android_app_name.js" />
+        <hook type="after_plugin_install" src="hooks/android_app_name.js" />
+        <hook type="after_platform_add" src="hooks/android_app_name.js" />
+        
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="One">
                 <param name="android-package" value="com.thunderhead.plugin.one.OnePlugin" />
@@ -58,7 +78,8 @@
         </config-file>
         <source-file src="src/android/OnePlugin.java" target-dir="src/com/thunderhead/plugin/one" />
         <source-file src="src/android/OneSdkVersion.java" target-dir="src/com/thunderhead/" />
-        <framework src="com.thunderhead.android:one-sdk:5.0.1" />
+        <source-file src="src/android/ThunderheadApplication.java" target-dir="src/com/thunderhead/" />
+        <framework src="com.thunderhead.android:one-sdk:9.1.0" />
         <framework src="src/android/one.gradle" custom="true" type="gradleReference" />
     </platform>
 </plugin>
