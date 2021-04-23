@@ -111,12 +111,16 @@ $ ionic cordova emulate android
 ```
 
 ### Clean Build 
-For most common build issues encountered, a full clean usually will fix the problem which you'll need to go through the original setup process again.
+For most common build issues encountered, a full clean usually will fix the problem which you'll need to go through the setup process again.
 
 To do a full clean, run the following command from the project directory:
 
 ```
 $ ./clean.sh
+
+// Setup again
+$ npm install
+$ ionic cordova plugin add cordova-plugin-one  
 ```
 
 ## Questions or need help
