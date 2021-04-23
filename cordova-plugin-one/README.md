@@ -243,7 +243,7 @@ window.One.getTid(onTidSuccess);
 
 ### Access debug information
 
-To configure logging, call the following methods:
+To configure logging within Xcode and Android Studio, call the following methods:
 
 1. `LogLevel.NONE` - if set, no messages will be displayed in the Xcode/Android Studio console.
     ```javascript
