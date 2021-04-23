@@ -81,13 +81,15 @@ To configure the ONE Cordova Plugin, declare a `window` variable and configure O
                     userId: "api@yourCompanyName",
                     hostName: "https://xx.thunderhead.com",
                     touchpointURI: "ionic://optimization-example",
-                    adminMode: false
+                    adminMode: false // only preview mode is supported.  
                 });
             }
         });
         }
     }
 	```
+
+* *Note*: Only preview mode is supported in Admin Mode.
 
 ## Additional features
 

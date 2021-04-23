@@ -1,4 +1,4 @@
-## Orchestration Example
+## Optimizing Programatically Using JSON Example
 
 An Ionic 5 example to demonstrate how to create Orchestrations with the Thunderhead Cordova Plugin.
 
@@ -71,7 +71,7 @@ System:
 		    userId: "api@yourCompanyName",
 		    hostName: "https://xx.thunderhead.com",
 		    touchpointURI: "ionic://optimization-example",
-		    adminMode: false
+		    adminMode: false // only preview mode is supported.  
 		  });
 		}
 	      });
