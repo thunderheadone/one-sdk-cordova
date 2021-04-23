@@ -2,7 +2,7 @@
 
 An Ionic 5 example to demonstrate how to create Orchestrations with the Thunderhead Cordova Plugin.
 
-### Requirements
+## Requirements
 
 The example app was built using the following versions:
 
@@ -38,7 +38,7 @@ System:
 
 ```
 
-### Setup
+## Setup
 
 1. To create Orchestrations in ONE for this tutorial, see this [guide](https://na5.thunderhead.com/one/help/conversations/how-do-i/mobile/ios-orchestrations/one_integrate_mobile_ios_orch_intro/).
 
@@ -94,7 +94,7 @@ System:
 	$ ionic cordova plugin add ../../cordova-plugin-one 
 	```
 
-### Start the Ionic app in iOS or Android
+## Start the Ionic app in iOS or Android
 You can find the respective project files located in the `platforms` folder from the project directory to open and run with Xcode and/or Android Studio.
 
 To run the project in Terminal, run the following commands from the project directory.
@@ -110,7 +110,7 @@ $ ionic cordova platform add android
 $ ionic cordova emulate android
 ```
 
-### Clean Build 
+## Clean Build 
 For most common build issues encountered, a full clean usually will fix the problem which you'll need to go through the setup process again.
 
 To do a full clean, run the following command from the project directory:
