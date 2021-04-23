@@ -10,16 +10,16 @@ The example app was built using the following versions:
 Ionic:
 
    Ionic CLI                     : 6.13.1 (/usr/local/lib/node_modules/@ionic/cli)
-   Ionic Framework               : @ionic/angular 5.5.4
-   @angular-devkit/build-angular : 0.1101.4
-   @angular-devkit/schematics    : 11.2.1
-   @angular/cli                  : 11.1.4
-   @ionic/angular-toolkit        : 3.1.0
+   Ionic Framework               : @ionic/angular 5.6.5
+   @angular-devkit/build-angular : 0.1102.10
+   @angular-devkit/schematics    : 11.2.10
+   @angular/cli                  : 11.2.10
+   @ionic/angular-toolkit        : 3.1.1
 
 Cordova:
 
    Cordova CLI       : 10.0.0
-   Cordova Platforms : android 9.0.0, ios 6.2.0
+   Cordova Platforms : android 9.1.0, ios 6.2.0
    Cordova Plugins   : cordova-plugin-ionic-keyboard 2.2.0, cordova-plugin-ionic-webview 4.2.1, (and 7 other plugins)
 
 Utility:
@@ -32,7 +32,7 @@ System:
    Android SDK Tools : 26.1.1 (/Users/alexnguyen/Library/Android/sdk/)
    ios-sim           : 8.0.2
    NodeJS            : v15.13.0 (/usr/local/Cellar/node/15.13.0/bin/node)
-   npm               : 7.7.6
+   npm               : 7.10.0
    OS                : macOS Big Sur
    Xcode             : Xcode 12.4 Build version 12D4e
 
@@ -92,7 +92,7 @@ System:
   // installs from npm
   $ ionic cordova plugin add cordova-plugin-one       
   OR 
-  // installs from file reference
+  // installs from local file reference
   $ ionic cordova plugin add ../../cordova-plugin-one 
   ```
 
