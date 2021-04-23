@@ -42,43 +42,42 @@ System:
 
 1. To create Orchestrations in ONE for this tutorial, see this [guide](https://na5.thunderhead.com/one/help/conversations/how-do-i/mobile/ios-orchestrations/one_integrate_mobile_ios_orch_intro/).
 
-	*Note:* Skip `Step 1` in the guide as you'll be using this Ionic example app instead.
+	* *Note:* Skip `Step 1` in the guide as you'll be using this Ionic example app instead.
 
 2. Open `app.component.ts`, declare a `window` variable and configure ONE when platform is ready. 
-  * To find your ONE credentials, see [Find the Information required when Integrating ONE with your Mobile App](https://na5.thunderhead.com/one/help/conversations/how-do-i/mobile/one_integrate_mobile_find_integration_info/)
+	* To find your ONE credentials, see [Find the Information required when Integrating ONE with your Mobile App](https://na5.thunderhead.com/one/help/conversations/how-do-i/mobile/one_integrate_mobile_find_integration_info/)
+	```angular
+	  import { Component } from '@angular/core';
+	  import { Platform } from '@ionic/angular';
 
-	```javascript
-  import { Component } from '@angular/core';
-  import { Platform } from '@ionic/angular';
+	  declare var window;
 
-  declare var window;
+	  export class AppComponent {
+	    constructor(private platform: Platform) {
+	      this.initializeOne();
+	    }
 
-  export class AppComponent {
-    constructor(private platform: Platform) {
-      this.initializeOne();
-    }
+	    private initializeOne() {
+	      // The platform is ready and native functionality can be called.
+	      // https://ionicframework.com/docs/angular/platform#ready-promise-string-
+	      this.platform.ready().then(() => {
+		var one = window.One;
 
-    private initializeOne() {
-      // The platform is ready and native functionality can be called.
-      // https://ionicframework.com/docs/angular/platform#ready-promise-string-
-      this.platform.ready().then(() => {
-        var one = window.One;
-
-        if (one) {
-          one.init({
-            siteKey: "ONE-XXXXXXXXXX-1022",
-            apiKey: "f713d44a-8af0-4e79-ba7e-xxxxxxxxxxxxxxxx",
-            sharedSecret: "bb8bacb2-ffc2-4c52-aaf4-xxxxxxxxxxxxxxxx",
-            userId: "api@yourCompanyName",
-            hostName: "https://xx.thunderhead.com",
-            touchpointURI: "ionic://optimization-example",
-            adminMode: false
-          });
-        }
-      });
-    }
-  }
-	```
+		if (one) {
+		  one.init({
+		    siteKey: "ONE-XXXXXXXXXX-1022",
+		    apiKey: "f713d44a-8af0-4e79-ba7e-xxxxxxxxxxxxxxxx",
+		    sharedSecret: "bb8bacb2-ffc2-4c52-aaf4-xxxxxxxxxxxxxxxx",
+		    userId: "api@yourCompanyName",
+		    hostName: "https://xx.thunderhead.com",
+		    touchpointURI: "ionic://optimization-example",
+		    adminMode: false
+		  });
+		}
+	      });
+	    }
+	  }
+	  ```
 
 3. Install Node dependencies
 
@@ -87,13 +86,13 @@ System:
 	```
 
 4. Install Thunderhead Cordova Plugin
-  ```
-  // installs from npm
-  $ ionic cordova plugin add cordova-plugin-one       
-  OR 
-  // installs from local file reference
-  $ ionic cordova plugin add ../../cordova-plugin-one 
-  ```
+	```
+	// installs from npm
+	$ ionic cordova plugin add cordova-plugin-one       
+	OR 
+	// installs from local file reference
+	$ ionic cordova plugin add ../../cordova-plugin-one 
+	```
 
 ### Start the Ionic app in iOS or Android
 You can find the respective project files located in the `platforms` folder from the project directory to open and run with Xcode and/or Android Studio.
