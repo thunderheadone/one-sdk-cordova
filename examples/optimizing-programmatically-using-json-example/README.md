@@ -52,7 +52,6 @@ System:
   import { Platform } from '@ionic/angular';
 
   declare var window;
-  ...
 
   export class AppComponent {
     constructor(private platform: Platform) {
