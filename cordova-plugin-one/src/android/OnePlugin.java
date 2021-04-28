@@ -132,6 +132,7 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
           break;
         case 1:
           oneLoggingConfiguration = OneLoggingConfiguration.builder()
+            .log(LogLevel.VERBOSE)
             .log(Component.ANY)
             .build();
           One.setLoggingConfiguration(oneLoggingConfiguration);
