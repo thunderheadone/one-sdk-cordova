@@ -13,7 +13,7 @@ An Ionic 5 example to demonstrate how to integrate and use the Thunderhead Cordo
 	  userId: "user@domain",
 	  hostName: "https://xxx.thunderhead.com",
 	  touchpointURI: "optimization-example",  
-	  adminMode: false
+	  adminMode: false // only preview mode is supported.  
 	});
 	```
 

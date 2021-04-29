@@ -30,6 +30,9 @@ import com.thunderhead.android.api.interactions.OneInteractionPath;
 import com.thunderhead.android.api.interactions.OneRequest;
 import com.thunderhead.android.api.interactions.OneResponseCode;
 import com.thunderhead.android.api.interactions.OneResponseCodeRequest;
+import com.thunderhead.android.api.logging.Component;
+import com.thunderhead.android.api.logging.LogLevel;
+import com.thunderhead.android.api.logging.OneLoggingConfiguration;
 import com.thunderhead.android.api.optout.OneOptOutConfiguration;
 import com.thunderhead.android.api.responsetypes.OneAPIError;
 import com.thunderhead.android.api.responsetypes.OneResponse;
@@ -116,6 +119,32 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
       return true;
     } else if ("getTid".equals(action)) {
       callbackContext.success(getTid());
+      return true;
+    } else if ("setLogLevel".equals(action)) {
+      int logLevel = args.getInt(0);
+      OneLoggingConfiguration oneLoggingConfiguration;
+
+      switch (logLevel) {
+        case 0:
+          oneLoggingConfiguration = OneLoggingConfiguration.builder()
+            .log(LogLevel.WARN)
+            .log(LogLevel.ERROR)
+            .log(Component.ANY)
+            .build();
+          One.setLoggingConfiguration(oneLoggingConfiguration);
+          break;
+        case 1:
+          oneLoggingConfiguration = OneLoggingConfiguration.builder()
+            .log(LogLevel.VERBOSE)
+            .log(LogLevel.DEBUG)
+            .log(Component.ANY)
+            .build();
+          One.setLoggingConfiguration(oneLoggingConfiguration);
+          break;
+        default:
+          break;
+      }
+      callbackContext.success();
       return true;
     } else if ("clearUserProfile".equals(action)) {
       clearUserProfile();

@@ -33,6 +33,9 @@ export class AppComponent {
 
         // Uncomment to opt out of all tracking
         // one.optOut(true);
+
+        // Uncomment to set Log Level
+        // one.setLogLevel(one.LogLevel.ALL);
       }
     });
   }

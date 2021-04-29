@@ -81,13 +81,15 @@ To configure the ONE Cordova Plugin, declare a `window` variable and configure O
                     userId: "api@yourCompanyName",
                     hostName: "https://xx.thunderhead.com",
                     touchpointURI: "ionic://optimization-example",
-                    adminMode: false
+                    adminMode: false // only preview mode is supported.  
                 });
             }
         });
         }
     }
 	```
+
+* *Note*: Only preview mode is supported in Admin Mode.
 
 ## Additional features
 
@@ -241,6 +243,20 @@ var onTidSuccess = function(tid) {
 window.One.getTid(onTidSuccess);
 ```
 
+### Access debug information
+
+To configure logging within Xcode and Android Studio, call the following methods:
+
+1. `LogLevel.NONE` - if set, no messages will be displayed in the Xcode/Android Studio console.
+    ```javascript
+    window.one.setLogLevel(window.one.LogLevel.NONE);
+    ```
+
+2. `LogLevel.ALL` - if set, all log messages will be displayed in the Xcode/Android Studio console.
+    ```javascript
+    window.one.setLogLevel(window.one.LogLevel.ALL);
+    ```
+    
 ### Clear the User Profile
 To clear the current app tid, call the following public method:
 ```javascript
