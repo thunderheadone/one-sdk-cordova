@@ -127,12 +127,16 @@ public class OnePlugin extends org.apache.cordova.CordovaPlugin {
       switch (logLevel) {
         case 0:
           oneLoggingConfiguration = OneLoggingConfiguration.builder()
+            .log(LogLevel.WARN)
+            .log(LogLevel.ERROR)
+            .log(Component.ANY)
             .build();
           One.setLoggingConfiguration(oneLoggingConfiguration);
           break;
         case 1:
           oneLoggingConfiguration = OneLoggingConfiguration.builder()
             .log(LogLevel.VERBOSE)
+            .log(LogLevel.DEBUG)
             .log(Component.ANY)
             .build();
           One.setLoggingConfiguration(oneLoggingConfiguration);
