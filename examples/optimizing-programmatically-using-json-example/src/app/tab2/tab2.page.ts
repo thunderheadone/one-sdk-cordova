@@ -29,7 +29,7 @@ export class Tab2Page {
   onClick(product) {
     switch (product) {
       case "Product 1B": {
-        one.sendInteraction("/tab2/B0", null,
+        one.sendInteraction("/tab2/product-1B-button", null,
           function(response) {
             console.log("::tab2 Send button (B0) Interaction response: ", response)
           },
@@ -40,7 +40,7 @@ export class Tab2Page {
         break;
       }
       case "Product 2B": {
-        one.sendInteraction("/tab2/B1", null,
+        one.sendInteraction("/tab2/product-2B-button", null,
           function(response) {
             console.log("::tab2 Send button (B1) Interaction response: ", response)
           },
@@ -51,7 +51,7 @@ export class Tab2Page {
         break;
       }
       case "Product 1C": {
-        one.sendInteraction("/tab2/B2", null,
+        one.sendInteraction("/tab2/product-1C-button", null,
           function(response) {
             console.log("::tab2 Send button (B2) Interaction response: ", response)
           },
@@ -62,7 +62,7 @@ export class Tab2Page {
         break;
       }
       case "Product 2C": {
-        one.sendInteraction("/tab2/B3", null,
+        one.sendInteraction("/tab2/product-2C-button", null,
           function(response) {
             console.log("::tab2 Send button (B3) Interaction response: ", response)
           },
