@@ -77,7 +77,7 @@ System:
 	      });
 	    }
 	  }
-	  ```
+	```
 
 3. Install Node dependencies
 
@@ -95,25 +95,40 @@ System:
 	```
 
 ## Start the Ionic app in iOS or Android
-You can find the respective project files located in the `platforms` folder from the project directory to open and run with Xcode and/or Android Studio.
+You can start the app either through Terminal or running it in your IDE.  
 
-To run the project in Terminal, run the following commands from the project directory.
-```
-// iOS
-$ ionic cordova platform add ios
-$ ionic cordova emulate ios
-```
+* To run the project in your IDE, you must first run the below commands from the project directory.  Then, you can find the respective project files located in the `platforms` folder to open and run with Xcode and/or Android Studio. 
 
-```
-// Android
-$ ionic cordova platform add android
-$ ionic cordova emulate android
-```
+	```
+	// iOS
+	$ ionic cordova platform add ios
+	$ ionic cordova prepare ios
+	```
+
+	```
+	// Android
+	$ ionic cordova platform add android
+	$ ionic cordova prepare ios
+	```
+
+* To run the project in Terminal, run the following commands from the project directory.
+
+	```
+	// iOS
+	$ ionic cordova platform add ios
+	$ ionic cordova emulate ios
+	```
+
+	```
+	// Android
+	$ ionic cordova platform add android
+	$ ionic cordova emulate android
+	```
 
 ## Clean Build 
-For most common build issues encountered, a full clean usually will fix the problem which you'll need to go through the setup process again.
+For most common build issues, a full clean usually resolves it in which you'll need to go through the setup process again.
 
-To do a full clean, run the following command from the project directory:
+To do a full clean, run the following script from the project directory:
 
 ```
 $ ./clean.sh
