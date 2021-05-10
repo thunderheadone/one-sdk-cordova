@@ -130,7 +130,7 @@ You can start the app either through Terminal or running it in your IDE.
 	```
 	// Android
 	$ ionic cordova platform add android
-	$ ionic cordova prepare ios
+	$ ionic cordova prepare android
 	```
 
 * To run the project in Terminal, run the following commands from the project directory.
