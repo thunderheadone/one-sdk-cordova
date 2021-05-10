@@ -22,37 +22,44 @@ An Ionic 3 example to demonstrate how to integrate and use the Thunderhead Cordo
         * User Mode (adminMode = false) User mode build should be used for production builds, when you are satisfied that all insights are being tracked in Admin mode and internal QA requirements have been met.
       * For more information, [Find the Information required when Integrating ONE with your Mobile App](https://na5.thunderhead.com/one/help/conversations/how-do-i/mobile/one_integrate_mobile_find_integration_info/)
       
-    ```angular
-      import { Component } from '@angular/core';
-      import { Platform } from '@ionic/angular';
+  ```typescript
+  import { Component } from '@angular/core';
+  import { Platform } from '@ionic/angular';
 
-      declare var window;
+  declare var window:any;
 
-      export class AppComponent {
-        constructor(private platform: Platform) {
-          this.initializeOne();
-        }
+  @Component({
+    selector: 'app-root',
+    templateUrl: 'app.component.html',
+    styleUrls: ['app.component.scss'],
+  })
 
-        private initializeOne() {
-          // The platform is ready and native functionality can be called.
-          // https://ionicframework.com/docs/angular/platform#ready-promise-string-
-          this.platform.ready().then(() => {
-            var one = window.One;
-            if (one) {
-              one.init({
-                siteKey: "ONE-XXXXXXXXXX-1022",
-                apiKey: "f713d44a-8af0-4e79-ba7e-xxxxxxxxxxxxxxxx",
-                sharedSecret: "bb8bacb2-ffc2-4c52-aaf4-xxxxxxxxxxxxxxxx",
-                userId: "api@yourCompanyName",
-                hostName: "https://xx.thunderhead.com",
-                touchpointURI: "optimization-example",
-                adminMode: false // only preview mode is supported.  
-              });
-            }
+  export class AppComponent {
+    constructor(private platform: Platform) {
+      this.initializeOne();
+    }
+
+    private initializeOne() {
+      // The platform is ready and native functionality can be called.
+      // https://ionicframework.com/docs/angular/platform#ready-promise-string-
+      this.platform.ready().then(() => {
+        var one = window.One;
+
+        if (one) {
+          one.init({
+            siteKey: "ONE-XXXXXXXXXX-1022",
+            apiKey: "f713d44a-8af0-4e79-ba7e-xxxxxxxxxxxxxxxx",
+            sharedSecret: "bb8bacb2-ffc2-4c52-aaf4-xxxxxxxxxxxxxxxx",
+            userId: "api@yourCompanyName",
+            hostName: "https://xx.thunderhead.com",
+            touchpointURI: "ionic://optimization-example",
+            adminMode: false
           });
         }
-      }
-    ```
+      });
+    }
+  }
+  ```
 
 2. From Terminal, navigate into the `ionic3-angular-example` project directory, and run the following commands:
     * Install Node dependencies
