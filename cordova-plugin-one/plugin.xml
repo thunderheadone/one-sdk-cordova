@@ -47,8 +47,8 @@
             <config>
                 <source url="https://github.com/CocoaPods/Specs.git"/>
             </config>
-            <pods use-frameworks="true">
-                <pod name="Thunderhead" spec="~> 6.3.4" />
+            <pods use-frameworks="false">
+                <pod name="Thunderhead" spec="~> 6.3.7" />
             </pods>
         </podspec>
     </platform>
