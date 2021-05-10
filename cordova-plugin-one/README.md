@@ -54,7 +54,22 @@ $ cordova plugin add cordova-plugin-one
 ## Configure the Thunderhead SDK
 To configure the ONE Cordova Plugin, declare a `window` variable and configure ONE when platform is ready. 
 * See example of usage [here](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic5-angular-example/src/app/app.component.ts#L28)
-* To find your ONE credentials, see [Find the Information required when Integrating ONE with your Mobile App](https://na5.thunderhead.com/one/help/conversations/how-do-i/mobile/one_integrate_mobile_find_integration_info/)
+* The configuration parameters include:
+    * Site Key (for your specific Space)
+    * Touchpoint URI
+        * The native Thunderhead SDK will automatically prefix the URI scheme, based on the platform the app runs on (i.e. android:// and ios://), when it is omitted. 
+            * i.e. “optimization-example”
+        * If you want to configure under a single Touchpoint, you can explicitly prefix your URI scheme 
+            * i.e. “ionic://optimization-example”
+    * API Key & Shared Secret (required for OAuth 1.0 authentication)
+    * Username/User ID (required for OAuth 1.0 authentication)
+    * Host name. 
+        * Typically, this is https://na5.thunderhead.com or https://eu2.thunderhead.com.
+    * Admin Mode
+        * Admin mode (adminMode = true) provides you with an interface that lets you add Interaction Points, Activity Capture Points, and Attribute Capture Points to native UI elements within the app. However, hybrid apps do not support this feature because hybrid solutions typically use non-native UI elements. Only preview mode is supported to view your unpublished (In the Works) configuration before publishing it to your live environment.
+            * The Admin mode build should only be distributed internally to business users involved in ONE setup. This is your internal dev build.
+        * User Mode (adminMode = false) User mode build should be used for production builds, when you are satisfied that all insights are being tracked in Admin mode and internal QA requirements have been met.
+* For more information, [Find the Information required when Integrating ONE with your Mobile App](https://na5.thunderhead.com/one/help/conversations/how-do-i/mobile/one_integrate_mobile_find_integration_info/)
 
     ```javascript
     import { Component } from '@angular/core';
@@ -80,7 +95,7 @@ To configure the ONE Cordova Plugin, declare a `window` variable and configure O
                     sharedSecret: "bb8bacb2-ffc2-4c52-aaf4-xxxxxxxxxxxxxxxx",
                     userId: "api@yourCompanyName",
                     hostName: "https://xx.thunderhead.com",
-                    touchpointURI: "ionic://optimization-example",
+                    touchpointURI: "optimization-example",
                     adminMode: false // only preview mode is supported.  
                 });
             }
