@@ -17,6 +17,7 @@ The ONE SDK Cordova Plugin for iOS and Android.
     * [Send an Interaction with a Callback](#send-an-interaction-with-a-callback)
     * [Send properties to an Interaction](#send-properties-to-an-interaction)
     * [Send properties to a Base Touchpoint](#send-properties-to-a-base-touchpoint)
+    * [Send a response code](#send-a-response-code)
     * [Ability to whitelist identity transfer links](#ability-to-whitelist-identity-transfer-links)
     * [Ability to blacklist identity transfer links](#ability-to-blacklist-identity-transfer-links)
     * [Disable automatic identity transfer](#disable-automatic-identity-transfer)
