@@ -14,6 +14,14 @@ module.exports = {
         ]);
     },
 
+	optOut : function(optOut, successCallback, errorCallback) {
+	    exec(successCallback, errorCallback, "One", "optOut", [optOut]);
+	},
+
+	optOut : function(optOut, options, successCallback, errorCallback) {
+	    exec(successCallback, errorCallback, "One", "optOut", [optOut, options]);
+	},
+
 	sendInteraction : function(interactionPath, properties, successCallback, errorCallback) {
 	    exec(successCallback, errorCallback, "One", "sendInteraction", [interactionPath, properties]);
 	},
@@ -22,12 +30,25 @@ module.exports = {
 	    exec(successCallback, errorCallback, "One", "sendProperties", [interactionPath, properties]);
 	},
 
+	sendResponseCode : function(responseCode, interactionPath, successCallback, errorCallback) {
+	    exec(successCallback, errorCallback, "One", "sendResponseCode", [responseCode, interactionPath]);
+	},
+
 	sendBaseTouchpointProperties : function(properties, successCallback, errorCallback) {
 	    exec(successCallback, errorCallback, "One", "sendBaseTouchpointProperties", [properties]);
 	},
 
 	getTid : function(successCallback, errorCallback) {
 	    exec(successCallback, errorCallback, "One", "getTid", []);
+	},
+
+	/**
+   	* Sets the Log Level. 
+	*
+	* @param {LogLevel} logLevel - Specifies Log Level to use.  LogLevel.NONE or LogLevel.ALL
+   */
+	setLogLevel : function(logLevel, successCallback, errorCallback) {
+	    exec(successCallback, errorCallback, "One", "setLogLevel", [logLevel]);
 	},
 
 	clearUserProfile : function(successCallback, errorCallback) {
@@ -54,24 +75,21 @@ module.exports = {
 		exec(successCallback, errorCallback, "One", "handleURL", [url]);
 	},
 
-	enablePushNotifications : function(enable, successCallback, errorCallback) {
-		exec(successCallback, errorCallback, "One", "enablePushNotifications", [enable]);
-	},
-
-	getPushToken : function(successCallback, errorCallback) {
-		exec(successCallback, errorCallback, "One", "getPushToken", []);
-	},
-
-	sendPushToken : function(pushToken, successCallback, errorCallback) {
-		exec(successCallback, errorCallback, "One", "sendPushToken", [pushToken]);
-	},
-
 	whitelistIdentityTransferLinks : function(links, successCallback, errorCallback) {
 		exec(successCallback, errorCallback, "One", "whitelistIdentityTransferLinks", links);
 	},
 
 	blacklistIdentityTransferLinks : function(links, successCallback, errorCallback) {
 		exec(successCallback, errorCallback, "One", "blacklistIdentityTransferLinks", links);
-	}
+	},
 
+	/**
+   	* Enum for configuring Logging Options.
+   	* @readonly
+   	* @enum {number}
+   	*/
+ 	LogLevel: {
+    	NONE: 0,
+    	ALL: 1
+  	}
 };

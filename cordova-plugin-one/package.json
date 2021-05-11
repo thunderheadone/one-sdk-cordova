@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-one",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "One Cordova Plugin for the ONE SDK for iOS and Android",
   "homepage": "https://www.thunderhead.com/",
   "repository": {
@@ -31,5 +31,5 @@
     "shelljs": "0.7.8"
   },
   "author": "Thunderhead One, Inc.",
-  "license": "Copyright © 2020 Thunderhead. All rights reserved."
+  "license": "Copyright © 2021 Thunderhead. All rights reserved."
 }
