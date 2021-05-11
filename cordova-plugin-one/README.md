@@ -172,6 +172,19 @@ window.One.sendBaseTouchpointProperties({key:"value"});
 ```
 * See example of usage [here](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic5-angular-example/src/app/app.component.ts#L53)
 
+### Send a response code
+To send a response code, call the method shown below by passing the response code and the corresponding Interaction path as parameters:
+
+```swift
+One.sendResponseCode("yourCode", forInteractionPath:"/interactionPath")
+```
+* See example of usage [here](https://github.com/thunderheadone/one-sdk-cordova/tree/master/examples/optimizing-programmatically-using-json-example/src/app/tab1/tab1.page.ts#L61)
+
+*Note:*
+- This method should be used when displaying Optimizations programmatically and you need to capture the user's response.
+- This will send a `PUT` request to Thunderhead ONE or Salesforce Interaction Studio.
+- When sending Interaction requests programmatically, please ensure the Interaction starts with a `/` and only contains letters, numbers and/or dashes.
+
 ### Ability to whitelist identity transfer links
 To whitelist links to which the SDK appends a one-tid, call the following public method:
 ```javascript
