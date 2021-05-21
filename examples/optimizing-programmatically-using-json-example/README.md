@@ -90,7 +90,7 @@ System:
             siteKey: "ONE-XXXXXXXXXX-1022",
             apiKey: "f713d44a-8af0-4e79-ba7e-xxxxxxxxxxxxxxxx",
             sharedSecret: "bb8bacb2-ffc2-4c52-aaf4-xxxxxxxxxxxxxxxx",
-            userId: "api@yourCompanyName",
+            userId: "api@yourCompanyName", // when integrating with Interaction Studio use a numeric user id - see https://eu2.thunderhead.com/one/help/interaction-studio/how-do-i/mobile/one_integrate_mobile_find_integration_info/#username-user-id
             hostName: "https://xx.thunderhead.com",
             touchpointURI: "ionic://optimization-example",
             adminMode: false
