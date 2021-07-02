@@ -14,10 +14,6 @@ module.exports = {
         ]);
     },
 
-	optOut : function(optOut, successCallback, errorCallback) {
-	    exec(successCallback, errorCallback, "One", "optOut", [optOut]);
-	},
-
 	optOut : function(optOut, options, successCallback, errorCallback) {
 	    exec(successCallback, errorCallback, "One", "optOut", [optOut, options]);
 	},
