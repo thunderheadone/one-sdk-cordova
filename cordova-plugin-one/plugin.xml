@@ -71,7 +71,7 @@
         <source-file src="src/android/OnePlugin.java" target-dir="src/com/thunderhead/plugin/one" />
         <source-file src="src/android/OneSdkVersion.java" target-dir="src/com/thunderhead/" />
         <source-file src="src/android/ThunderheadProvider.java" target-dir="src/com/thunderhead/provider" />
-        <framework src="com.thunderhead.android:one-sdk:9.1.0" />
+        <framework src="com.thunderhead.android:one-sdk:10.0.0" />
         <framework src="src/android/one.gradle" custom="true" type="gradleReference" />
     </platform>
 </plugin>
