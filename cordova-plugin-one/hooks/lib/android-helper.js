@@ -24,7 +24,7 @@ module.exports = {
             }
             dependencies {
                 classpath 'com.android.tools.build:gradle:3.6.4'
-                classpath 'com.thunderhead.android:orchestration-plugin:4.0.0'
+                classpath 'com.thunderhead.android:orchestration-plugin:5.0.1'
             }
         }
         // One Cordova Plugin - End One SDK configuration`;
