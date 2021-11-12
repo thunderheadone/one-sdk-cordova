@@ -72,7 +72,7 @@ An Ionic 3 example to demonstrate how to integrate and use the Thunderhead Cordo
       $ ionic cordova plugin add cordova-plugin-one       
       OR 
       // installs from local file reference
-      $ ionic cordova plugin add ../../cordova-plugin-one 
+      $ ionic cordova plugin add ../cordova-plugin-one 
       ```
 
 ## Start the Ionic app in iOS or Android
