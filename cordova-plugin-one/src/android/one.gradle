@@ -2,16 +2,6 @@ apply plugin: 'com.thunderhead.android.orchestration-plugin'
 
 ext.cdvBuildToolsVersion = '30.0.3'
 
-dependencies {
-    implementation "com.thunderhead.android:one-sdk:10.0.2"
-    try {
-        if(configurations.getByName("thunderhead")) {
-            "thunderhead"("com.thunderhead.android:android-aspects:4.0.2")
-        }
-    } catch (e) {
-    }
-}
-
 repositories {
     maven {
         url 'https://thunderhead.mycloudrepo.io/public/repositories/one-sdk-android'
