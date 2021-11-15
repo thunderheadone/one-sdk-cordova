@@ -6,7 +6,6 @@ Thunderhead Cordova Plugin for apps built using Cordova, PhoneGap or Ionic. This
 ## Table of Contents
 * The main plugin code base and documentation are found under the [`cordova-plugin-one`](https://github.com/thunderheadone/one-sdk-cordova/tree/master/cordova-plugin-one) folder. 
 * Example apps with integration examples:
-	* [ionic3-angular-example](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic3-angular-example)
 	* [ionic4-angular-example](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic4-angular-example)
 	* [ionic5-angular-example](https://github.com/thunderheadone/one-sdk-cordova/tree/master/ionic5-angular-example)
 	* [optimizing-programmatically-using-json-example](https://github.com/thunderheadone/one-sdk-cordova/tree/master/examples/optimizing-programmatically-using-json-example)
