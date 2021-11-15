@@ -1,3 +1,8 @@
+#### Version 2.1.0
+* [UPDATE] Android: Updated Thunderhead Android SDK to v11.0.1
+* [BUGFIX] Android: Fixed a build time error where `org.aspectj:aspectjtools:1.9.7.M1` could not be found. This will require [Orchestration Plugin version 6.0.1](https://github.com/thunderheadone/one-android-orchestration-plugin/releases/tag/6.0.1).  For more info, see our [Known Issues FAQ](https://support.thunderhead.com/hc/en-us/articles/4412362299287-Android-Could-not-find-org-aspectj-aspectjtools-1-9-7-M1)
+* [UPDATE] iOS: Updated Thunderhead iOS SDK to v8.0.0
+
 #### Version 2.0.5
 * [UPDATE] Android: Updated Thunderhead Android SDK to v10.0.2
 * [UPDATE] Android: Added support for cordova-android@10.1.1
