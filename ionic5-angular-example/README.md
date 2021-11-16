@@ -2,6 +2,44 @@
 
 An Ionic 5 example to demonstrate how to integrate and use the Thunderhead Cordova Plugin.
 
+## Requirements
+
+Android Studio Arctic Fox
+Xcode 12+
+
+The example app was built using the following versions:
+
+```
+Ionic:
+
+   Ionic CLI                     : 6.13.1 
+   Ionic Framework               : @ionic/angular 5.3.2
+   @angular-devkit/build-angular : 0.1000.8
+   @angular-devkit/schematics    : 10.0.8
+   @angular/cli                  : 10.0.8
+   @ionic/angular-toolkit        : 2.3.3
+
+Cordova:
+
+   Cordova CLI       : 10.0.0
+   Cordova Platforms : android 10.1.1, ios 6.2.0
+   Cordova Plugins   : cordova-plugin-ionic-keyboard 2.2.0, cordova-plugin-ionic-webview 4.2.1, (and 6 other plugins)
+
+Utility:
+
+   cordova-res : 0.15.3
+   native-run  : 1.5.0
+
+System:
+
+   Android SDK Tools : 26.1.1 
+   ios-sim           : 8.0.2
+   NodeJS            : v12.22.7 
+   npm               : 6.14.15
+   OS                : macOS Big Sur
+   Xcode             : Xcode 13.1 Build version 13A1030d
+```
+
 ## Setup
 
 1. Open `app.component.ts`, declare a `window` variable and configure ONE when the platform is ready. 
