@@ -1,9 +1,7 @@
-/********* One.m Cordova Plugin Implementation *******/
-
 #import "Thunderhead/One.h"
 #import "OnePlugin.h"
 
-// NSString * const kOneCordovaPluginVersion = @"1.4.0";
+// NSString * const kOneCordovaPluginVersion = @"2.1.0";
 
 @implementation OnePlugin
 

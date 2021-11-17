@@ -16,6 +16,15 @@ function getBuildGradlePath() {
     return path.join("platforms", "android", "build.gradle");
 };
 
+/**
+ * Used to get the path to the app build.gradle file.
+ *
+ * @returns {string} The path to the app build.gradle file.
+ */
+function getAppBuildGradlePath() {
+    return path.join("platforms", "android", "app", "build.gradle");
+};
+
 module.exports = {
 
     /**
@@ -56,7 +65,26 @@ module.exports = {
         fs.writeFileSync(getBuildGradlePath(), buildGradle);
     },
 
-    isAndroidPlatform: function(platforms) {
+    /**
+     * Used to read the contents of the apps build.gradle file.
+     *
+     * @returns {string} The contents of the apps build.gradle file.
+     */
+    readAppBuildGradle: function () {
+        return fs.readFileSync(getAppBuildGradlePath(), "utf-8");
+    },
+
+    /**
+     * Used to write the given build.gradle contents to the apps
+     * build.gradle file.
+     *
+     * @param {string} buildGradle The body of the build.gradle file to write.
+     */
+    writeAppBuildGradle: function (buildGradle) {
+        fs.writeFileSync(getAppBuildGradlePath(), buildGradle);
+    },
+
+    isAndroidPlatform: function (platforms) {
         return platforms.indexOf("android") !== -1;
     }
 };

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-one" version="2.0.5" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+<plugin id="cordova-plugin-one" version="2.1.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
 	<name>cordova-plugin-one</name>
 	<description>One Cordova Plugin for the ONE SDK for iOS and Android</description>
 	<license>Copyright © 2021 Thunderhead. All rights reserved.</license>
@@ -48,7 +48,7 @@
                 <source url="https://github.com/CocoaPods/Specs.git"/>
             </config>
             <pods use-frameworks="false">
-                <pod name="Thunderhead" spec="~> 6.3.7" />
+                <pod name="Thunderhead" spec="~> 8.0.0" />
             </pods>
         </podspec>
     </platform>
@@ -71,7 +71,7 @@
         <source-file src="src/android/OnePlugin.java" target-dir="src/com/thunderhead/plugin/one" />
         <source-file src="src/android/OneSdkVersion.java" target-dir="src/com/thunderhead/" />
         <source-file src="src/android/ThunderheadProvider.java" target-dir="src/com/thunderhead/provider" />
-        <framework src="com.thunderhead.android:one-sdk:10.0.2" />
+        <framework src="com.thunderhead.android:one-sdk:11.0.1" />
         <framework src="src/android/one.gradle" custom="true" type="gradleReference" />
     </platform>
 </plugin>
