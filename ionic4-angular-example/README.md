@@ -99,6 +99,12 @@ System:
   }
   ```
 
+2. From Terminal, navigate into the `ionic4-angular-example` project directory, and run the following command:
+    * Install Node dependencies
+      ```
+      $ npm install
+      ```
+
 ## Start the Ionic app in iOS or Android
 You can start the app either through Terminal or running it in your IDE.  
 
