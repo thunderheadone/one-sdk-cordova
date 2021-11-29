@@ -99,18 +99,10 @@ System:
   }
   ```
 
-2. From Terminal, navigate into the `ionic5-angular-example` project directory, and run the following commands:
+2. From Terminal, navigate into the `ionic5-angular-example` project directory, and run the following command:
     * Install Node dependencies
       ```
       $ npm install
-      ```
-    * Install Thunderhead Cordova Plugin
-      ```
-      // installs from npm
-      $ ionic cordova plugin add cordova-plugin-one       
-      OR 
-      // installs from local file reference
-      $ ionic cordova plugin add ../cordova-plugin-one 
       ```
 
 ## Start the Ionic app in iOS or Android
@@ -153,8 +145,7 @@ To do a full clean, run the following script from the project directory:
 $ ./clean.sh
 
 // Setup again
-$ npm install
-$ ionic cordova plugin add cordova-plugin-one  
+$ npm install 
 ```
 
 ## Questions or need help

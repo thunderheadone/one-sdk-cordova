@@ -109,15 +109,6 @@ System:
 	$ npm install
 	```
 
-4. Install Thunderhead Cordova Plugin
-	```
-	// installs from npm
-	$ ionic cordova plugin add cordova-plugin-one       
-	OR 
-	// installs from local file reference
-	$ ionic cordova plugin add ../../cordova-plugin-one 
-	```
-
 ## Start the Ionic app in iOS or Android
 You can start the app either through Terminal or running it in your IDE.  
 
@@ -158,8 +149,7 @@ To do a full clean, run the following script from the project directory:
 $ ./clean.sh
 
 // Setup again
-$ npm install
-$ ionic cordova plugin add cordova-plugin-one  
+$ npm install  
 ```
 
 ## Questions or need help
