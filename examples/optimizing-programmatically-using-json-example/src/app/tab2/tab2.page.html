@@ -12,12 +12,14 @@
       <ion-title size="large">Product interest selector</ion-title>
     </ion-toolbar>
   </ion-header>
+
   <ion-list>
     <ion-list>
-      <ion-item detail="false" button *ngFor="let product of products" (click)="onClick(product)">
-          <ion-label>
-              {{ product }}
-          </ion-label>
+      <ion-item detail="false" button *ngFor="let product of productInteractions | keyvalue"
+        (click)="onClickProduct(product.value)">
+        <ion-label>
+          {{ product.key }}
+        </ion-label>
       </ion-item>
     </ion-list>
   </ion-list>
