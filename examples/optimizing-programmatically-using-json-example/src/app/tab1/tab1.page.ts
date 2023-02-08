@@ -87,10 +87,13 @@ export class Tab1Page {
           newOptimizations[1] = { src: content.image }
         }
 
-        responseMap.set(
-          <string>optimization.path,
-          responses.find((response: any) => response.sentiment == "positive")
-        )
+        let maybeResponse = responses.find((response: any) => response.sentiment == "positive")
+        if (maybeResponse) {
+          responseMap.set(
+            <string>optimization.path,
+            maybeResponse.code
+          )
+        }
       }
     }
 
