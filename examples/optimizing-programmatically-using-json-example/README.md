@@ -1,6 +1,6 @@
 ## Optimizing Programatically Using JSON Example
 
-An Ionic 5 example to demonstrate how to create Orchestrations with the Thunderhead Cordova Plugin.
+An Ionic 6 example to demonstrate how to create Orchestrations with the Thunderhead Cordova Plugin.
 
 ## Requirements
 
@@ -12,31 +12,27 @@ The example app was built using the following versions:
 ```
 Ionic:
 
-   Ionic CLI                     : 6.18.1 
-   Ionic Framework               : @ionic/angular 5.6.11
-   @angular-devkit/build-angular : 0.1102.14
-   @angular-devkit/schematics    : 11.2.14
+   Ionic CLI                     : 6.20.8 
+   Ionic Framework               : @ionic/angular 6.5.2
    @angular/cli                  : 11.2.14
-   @ionic/angular-toolkit        : 3.1.1
+   @ionic/angular-toolkit        : 6.1.0
 
 Cordova:
 
-   Cordova CLI       : 10.0.0
+   Cordova CLI       : 11.1.0
    Cordova Platforms : android 10.1.1, ios 6.2.0
-   Cordova Plugins   : cordova-plugin-ionic-keyboard 2.2.0, cordova-plugin-ionic-webview 4.2.1, (and 7 other plugins)
 
 Utility:
 
-   cordova-res : 0.15.3
-   native-run  : 1.5.0
+   native-run  : 1.7.1
 
 System:
    Android SDK Tools : 26.1.1 
-   ios-sim           : 8.0.2
-   NodeJS            : v16.13.0 
-   npm               : 8.1.0
-   OS                : macOS Big Sur
-   Xcode             : Xcode 13.1 Build version 13A1030d
+   ios-sim           : 9.0.0
+   NodeJS            : v19.6.0 
+   npm               : 9.4.0
+   OS                : macOS Monterey
+   Xcode             : Xcode 14.0 Build version 14A309
 ```
 
 

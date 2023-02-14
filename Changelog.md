@@ -1,3 +1,7 @@
+#### Version 3.0.0
+* [BREAKING] iOS: Added support for using the Cordova Plugin with Xcode 14.0. The Cordova Plugin now requires Xcode 14+.
+* [UPDATE] iOS: Updated Thunderhead iOS SDK to v10.0.0
+
 #### Version 2.1.1
 * [UPDATE] Android: Updated Thunderhead Android SDK to v11.0.2
 

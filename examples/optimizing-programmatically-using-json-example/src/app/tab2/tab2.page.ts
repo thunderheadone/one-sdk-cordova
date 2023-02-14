@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
+import { LoggerService } from '../logger.service';
+import { ThunderheadService } from '../thunderhead/thunderhead.service';
 
-declare var window:any;
-var one = window.One;
+const product1b = "Product 1B"
+const product2b = "Product 2B"
+const product1c = "Product 1C"
+const product2c = "Product 2C"
 
 @Component({
   selector: 'app-tab2',
@@ -9,71 +13,23 @@ var one = window.One;
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  products: String[] = ["Product 1B", "Product 2B", "Product 1C", "Product 2C"]
+  productInteractions = new Map<string, string>([
+    [product1b, "/tab2/product-1B-button"],
+    [product2b, "/tab2/product-2B-button"],
+    [product1c, "/tab2/product-1C-button"],
+    [product2c, "/tab2/product-2C-button"]
+  ])
 
-  constructor() {}
+  constructor(
+    private readonly thunderhead: ThunderheadService,
+    private readonly logger: LoggerService
+  ) { }
 
-  ionViewDidEnter() {
-    var one = window.One;
-    one.sendInteraction("/tab2", null,
-      function(response) {
-        // Fetch optimizations from response
-        console.log("::tab2 Send Interaction response: ", response)
-      },
-      function(error) {
-        console.log("::tab2 Send Interaction error: ", error)
-      }
-    );
-  }
-
-  onClick(product) {
-    switch (product) {
-      case "Product 1B": {
-        one.sendInteraction("/tab2/product-1B-button", null,
-          function(response) {
-            console.log("::tab2 Send button (B0) Interaction response: ", response)
-          },
-          function(error) {
-            console.log("::tab2 Send button (B0) Interaction error: ", error)
-          }
-        );
-        break;
-      }
-      case "Product 2B": {
-        one.sendInteraction("/tab2/product-2B-button", null,
-          function(response) {
-            console.log("::tab2 Send button (B1) Interaction response: ", response)
-          },
-          function(error) {
-            console.log("::tab2 Send button (B1) Interaction error: ", error)
-          }
-        );
-        break;
-      }
-      case "Product 1C": {
-        one.sendInteraction("/tab2/product-1C-button", null,
-          function(response) {
-            console.log("::tab2 Send button (B2) Interaction response: ", response)
-          },
-          function(error) {
-            console.log("::tab2 Send button (B2) Interaction error: ", error)
-          }
-        );
-        break;
-      }
-      case "Product 2C": {
-        one.sendInteraction("/tab2/product-2C-button", null,
-          function(response) {
-            console.log("::tab2 Send button (B3) Interaction response: ", response)
-          },
-          function(error) {
-            console.log("::tab2 Send button (B3) Interaction error: ", error)
-          }
-        );
-        break;
-      }
-      default:
-        break;
-    }
+  onClickProduct(productInteraction: string) {
+    this.thunderhead.sendInteraction(productInteraction, null)
+      .then((response) => {
+        this.logger.log("::tab2 sent interaction. ", productInteraction, response)
+      })
+      .catch((error: any) => { this.logger.error(error) })
   }
 }

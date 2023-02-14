@@ -1,7 +1,7 @@
 #import "Thunderhead/One.h"
 #import "OnePlugin.h"
 
-// NSString * const kOneCordovaPluginVersion = @"2.1.0";
+// NSString * const kOneCordovaPluginVersion = @"3.0.0";
 
 @implementation OnePlugin
 

@@ -1,6 +1,7 @@
 import { Component, NgZone } from '@angular/core';
+import { ThunderheadService } from '../thunderhead/thunderhead.service'
+import { LoggerService } from '../logger.service';
 import { ImageListItem } from '../models/image-list-item';
-import { Platform } from '@ionic/angular';
 
 const IMAGES: ImageListItem[] = [
   { src: 'assets/products/product-1A.png' },
@@ -11,59 +12,65 @@ const IMAGES: ImageListItem[] = [
 const cardItemIdentifier = "card-item";
 const topBannerIdentifier = "top-banner";
 
-declare var window:any;
-var one;
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-
 export class Tab1Page {
   images: ImageListItem[] = IMAGES;
-  myOptimizationData = {};
+  private positiveResponseCodeMap: Map<string, string> | null = null
 
-  constructor(private zone: NgZone, private platform: Platform) {}
+  constructor(
+    private readonly thunderhead: ThunderheadService,
+    private readonly ngZone: NgZone,
+    private readonly logger: LoggerService
+  ) { }
 
   ionViewDidEnter() {
-    // The platform is ready and native functionality can be called.
-    // https://ionicframework.com/docs/angular/platform#ready-promise-string-
-    this.platform.ready().then(() => {
-      one = window.One;
-
-      one.sendInteraction("/tab1", null,
-        (response) => {
-          console.log("::tab1 Send Interaction response: ", response)
-          this.optimizeContent(response)
-        },
-        (error) => {
-          console.log("::tab1 Send Interaction error: ", error)
-          this.zone.run(() => {
-            this.images = IMAGES
-          });
-        }
-      );
-    });
+    this.thunderhead.sendInteraction("/tab1", null)
+      .then((response) => {
+        this.logger.log("::tab1 Send Interaction Response: ", response)
+        this.optimizeContent(response)
+      })
+      .catch((error) => {
+        this.logger.error("::tab1 Send Interaction error: ", error)
+        this.ngZone.run(() => {
+          this.images = IMAGES
+        })
+      });
   }
 
-  private didSelectItem(index: number) {
-    let optimizationPath: string = null
+  onClickImage(index: number) {
+    let optimizationPath: string | null = null
     if (index == 0) {
       optimizationPath = topBannerIdentifier
     } else if (index == 1) {
       optimizationPath = cardItemIdentifier
     }
 
-    if (optimizationPath && this.myOptimizationData[optimizationPath]) {
-      let response = this.myOptimizationData[optimizationPath].responses.find(response => response.sentiment == "positive")
-      console.log("Sending response code: ", response.code)
-      one.sendResponseCode(response.code, "/tab1")
+    if (optimizationPath && this.positiveResponseCodeMap && this.positiveResponseCodeMap.get(optimizationPath)) {
+      let responseCode = this.positiveResponseCodeMap.get(optimizationPath)
+      if (responseCode) {
+        this.logger.log("::tab1 Sending response code: ", responseCode)
+
+        this.thunderhead.sendInteractionReponseCode("/tab1", responseCode)
+          .then(() => {
+            this.logger.log("::tab1 Sent response code: ", responseCode)
+          })
+          .catch((error) => {
+            this.logger.error("::tab1 Sending response code error: ", error)
+          })
+      } else {
+        this.logger.log("::tab1 could not find positive response code")
+      }
     }
   }
 
   private optimizeContent(response: any) {
     let newOptimizations = IMAGES
+    let responseMap = new Map<string, string>()
 
     for (var optimization of response.optimizations) {
       if (optimization.data) {
@@ -73,19 +80,26 @@ export class Tab1Page {
         let responses = optimizationData.actions[0].asset.responses
 
         if (optimization.path == topBannerIdentifier && content.image) {
-          console.log("::tab1 optimizing top banner: ", optimizationData.actions[0].name, content.image)
+          this.logger.log("::tab1 optimizing top banner: ", optimizationData.actions[0].name, content.image)
           newOptimizations[0] = { src: content.image }
-        }
-        if (optimization.path == cardItemIdentifier && content.image) {
-          console.log("::tab1 optimizing card item: ", optimizationData.actions[0].name, content.image)
+        } else if (optimization.path == cardItemIdentifier && content.image) {
+          this.logger.log("::tab1 optimizing card item: ", optimizationData.actions[0].name, content.image)
           newOptimizations[1] = { src: content.image }
         }
 
-        this.myOptimizationData[optimization.path] = { optimization: optimization, responses: responses }
+        let maybeResponse = responses.find((response: any) => response.sentiment == "positive")
+        if (maybeResponse) {
+          responseMap.set(
+            <string>optimization.path,
+            maybeResponse.code
+          )
+        }
       }
     }
 
-    this.zone.run(() => {
+    this.positiveResponseCodeMap = responseMap
+
+    this.ngZone.run(() => {
       this.images = newOptimizations
     })
   }
